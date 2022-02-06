@@ -1,0 +1,2 @@
+class SeachsController < ApplicationController
+end
