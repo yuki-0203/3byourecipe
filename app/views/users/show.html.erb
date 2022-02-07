@@ -1,0 +1,42 @@
+<h2>MyPage</h2>
+
+<tr>
+  <td><%= attachment_image_tag(@user, :image, :fill, 50, 50, fallback: "no-image-icon.png") %></td>
+  <td><%= @user.nickname %></td>
+   <td><%= @user.introduction %></td>
+  <td><%=link_to "プロフィール編集", profile_users_path(@user)%></td>
+  <td><%=link_to "個人情報を修正", edit_user_path(@user)%></td>
+</tr>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+
+
+
+<div class ="tab">
+        <ul class="text-center nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item w-20 bg-light">
+            <a class="nav-link active link-text" id="follower-tab" data-toggle="tab" href="#follower" role="tab" aria-controls="follower" aria-selected="true">投稿レシピ</a>
+          </li>
+          <li class="nav-item w-20 bg-light">
+            <a class="nav-link link-text" id="followed-tab" data-toggle="tab" href="#followed" role="tab" aria-controls="followed" aria-selected="false">お気に入りレシピ</a>
+          </li>
+           <li class="nav-item w-20 bg-light">
+            <a class="nav-link link-text" id="followed-tab" data-toggle="tab" href="#followed" role="tab" aria-controls="followed" aria-selected="false">My脱レポ</a>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="follower" role="tabpanel" aria-labelledby="follower-tab">
+            <div class="ml-1 mt-3 mb-2">投稿レシピ: <%= 5 %></div>
+               　　　----省略----
+        　</div>
+        　<div class="mb-5 tab-pane fade" id="followed" role="tabpanel" aria-labelledby="followed-tab">
+            <div class="ml-1 mt-5 mb-2">お気に入りレシピ: <%= 5 %></div>
+                    ----省略----
+        　</div>
+        　        　<div class="mb-5 tab-pane fade" id="followed" role="tabpanel" aria-labelledby="followed-tab">
+            <div class="ml-1 mt-5 mb-2">My脱レポ: <%= 5 %></div>
+                    ----省略----
+        　</div>
+
+        </div>
+</div>

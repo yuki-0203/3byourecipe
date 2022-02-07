@@ -1,0 +1,9 @@
+<h2>プロフィール編集</h2>
+
+<%= form_with(model: @user,local: true) do |f| %>
+<%= f.text_field :last_name , class: 'form-control'%>
+<%= f.text_field :first_name , class: 'form-control'%>
+<%= f.number_field :phone_number , class: 'form-control'%>
+<%= f.email_field :email , class: 'form-control'%>
+<%= f.submit '登録情報を修正する'%>
+<% end %>

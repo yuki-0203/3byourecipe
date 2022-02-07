@@ -1,0 +1,21 @@
+<h2>プロフィール編集</h2>
+
+
+<%= form_with(model: @user,local: true) do |f| %>
+<%= f.attachment_field :image  %>
+<%= f.text_field :nickname , class: 'form-control'%>
+<%= f.text_area :introduction , class: 'form-control'%>
+<%= f.submit 'プロフィールを更新する'%>
+<% end %>
+
+<%#画像プレビュー%>
+  <img id="preview" style="width: 200px;height: 200px;">
+  <script>
+    $('#user_image').on('change', function (e) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#preview").attr('src', e.target.result);
+      }
+      reader.readAsDataURL(e.target.files[0]);
+      });
+  </script>

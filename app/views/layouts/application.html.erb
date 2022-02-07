@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DatsuryokuRecipe</title>
+    <title>脱力レシピ</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+     <div id="wrapper">
+        <%= render "layouts/header"%>
+    </div>
+    <main>
+     <div id="flash">
+        <%= render "layouts/flash" %>
+     </div>
+      <%= yield %>
+    </main>
+    <%= render "layouts/footer"%>
   </body>
 </html>
