@@ -1,0 +1,58 @@
+<h2>レシピ投稿</h2>
+
+<%= form_with(model: @recipe,url: confirm_recipes_path, local:true ) do |f| %>
+    <%= f.label :name, "料理名"%>
+  　<%= f.text_field :name,:size =>"100"  %>
+  　<br>
+
+  　<%= f.attachment_field :image  %>
+    <br>
+  　<%= f.label :introduction, "料理紹介"%>
+  　<%= f.text_area :introduction,:size =>"60" %>
+    <br>
+
+    <%#= f.label :タグ, "タグ"%>
+  　<%#= f.text_field :タグ,:size =>"60" %>
+    <br>
+
+    <h5>材料（最大8種類まで）</h5>
+    <%#= f.label :materials/serving%>
+  　<%#= f.text_field :materials/serving,:size =>"10" %>
+  　人前
+    <br>
+    ーーーーーーーーーーーーーーーーーーーーーーーー
+    <%#= f.label :materials/name%>
+  　<%#= f.text_field :materials/name,:size =>"10" %>
+  　<%#= f.label :materials/quantity%>
+  　<%#= f.text_field :materials/quantity,:size =>"10" %>
+  　<%# destroy%>
+
+  　<br>
+  　<p>作り方（最大５ステップまで）</p>
+  　１<%#= f.attachment_field :image  %>
+  　    <%#= f.label steps/explanation%>
+    　<%#= f.text_erea :materials/explanation,:size =>"20" %>
+  　２
+  　３
+  　４
+  　５
+  　  <br>
+  　<%= f.label :note, "備考"%>
+  　<%= f.text_area :note,:size =>"60" %>
+
+  　<%= f.submit '確認画面へ'%>
+
+
+<% end %>
+
+<%#画像プレビュー%>
+  <img id="preview" style="width: 200px;height: 200px;">
+  <script>
+    $('#user_image').on('change', function (e) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#preview").attr('src', e.target.result);
+      }
+      reader.readAsDataURL(e.target.files[0]);
+      });
+  </script>

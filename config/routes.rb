@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :recipes do
     collection do
       post 'confirm'
+      post 'back'
     end
     resource :favorites, only: %i[create destroy]
     resources :impressions

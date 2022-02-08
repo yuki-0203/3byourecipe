@@ -5,4 +5,6 @@ class Recipe < ApplicationRecord
   has_many :steps, dependent: :destroy
   has_many :recipe_tags, dependent: :destroy
   has_many :impression, dependent: :destroy
+  
+  attachment :image
 end
