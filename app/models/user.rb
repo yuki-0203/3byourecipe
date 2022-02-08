@@ -8,4 +8,12 @@ class User < ApplicationRecord
   has_many :impressions, dependent: :destroy
   has_many :favorites, dependent: :destroy
   attachment :image
+
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :phone_number, presence: true
+  validates :email, presence: true
+  validates :is_gender, presence: true
+  validates :password, presence: true
+
 end

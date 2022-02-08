@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20_220_206_124_154) do
     t.datetime 'remember_created_at'
     t.string 'last_name', null: false
     t.string 'first_name', null: false
-    t.integer 'phone_number', null: false
+    t.integer 'phone_number', null: falses
     t.integer 'is_gender', null: false
     t.string 'nickname'
     t.text 'introduction'

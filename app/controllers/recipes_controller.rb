@@ -1,9 +1,15 @@
 class RecipesController < ApplicationController
-  def new; end
+  def new
+    
+  end
 
-  def confirm; end
+  def confirm
+  
+  end
 
-  def create; end
+  def create
+  
+  end
 
   def index; end
 
