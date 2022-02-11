@@ -16,3 +16,39 @@
   @import "bootstrap";
   @import 'font-awesome-sprockets';
   @import 'font-awesome';
+
+*{
+  color: #4D4D4D;
+  font-family: "Hannotate SC","TsukuARdGothic-Regular", "Segoe UI", "Helvetica Neue", "Hiragino Kaku Gothic ProN", メイリオ, meiryo, sans-serif;
+}
+
+
+a, a:visited, a:focus, a:hover {
+    text-decoration: none;
+    color: #4D4D4D;
+    font-weight: bold;
+    font-size :16px;
+}
+
+.nav-item-link{
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+
+}
+.nav-item-link::after{
+  content:'';
+  position:absolute
+  ;width:100%;
+  transform:scaleX(0);
+  height:2px;
+  bottom:0;
+  left:0;
+  background-color:#E6C8E8;
+  transform-origin:bottom right;
+  transition:transform .4s cubic-bezier(.86,0,.07,1)
+}
+.nav-item-link:hover::after{
+  transform:scaleX(1);
+  transform-origin:bottom left
+}

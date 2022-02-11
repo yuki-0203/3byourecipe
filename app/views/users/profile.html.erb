@@ -9,6 +9,7 @@
 <% end %>
 
 <%#画像プレビュー%>
+<div class ="profile_image">
   <img id="preview" style="width: 200px;height: 200px;">
   <script>
     $('#user_image').on('change', function (e) {
@@ -19,3 +20,4 @@
       reader.readAsDataURL(e.target.files[0]);
       });
   </script>
+</div>
