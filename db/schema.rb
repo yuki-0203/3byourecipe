@@ -10,84 +10,107 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_206_124_154) do
-  create_table 'favorites', force: :cascade do |t|
-    t.integer 'recipe_id', null: false
-    t.integer 'user_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+ActiveRecord::Schema.define(version: 2022_02_08_120524) do
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "recipe_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'impressions', force: :cascade do |t|
-    t.integer 'recipe_id', null: false
-    t.integer 'user_id', null: false
-    t.text 'impression', null: false
-    t.text 'image_id'
-    t.text 'reply_comment'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "impressions", force: :cascade do |t|
+    t.integer "recipe_id", null: false
+    t.integer "user_id", null: false
+    t.text "impression", null: false
+    t.text "image_id"
+    t.text "reply_comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'materials', force: :cascade do |t|
-    t.integer 'recipe_id', null: false
-    t.string 'name', null: false
-    t.string 'quantity', null: false
-    t.integer 'serving', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "materials", force: :cascade do |t|
+    t.integer "recipe_id", null: false
+    t.string "name", null: false
+    t.string "quantity", null: false
+    t.integer "serving", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'recipe_tags', force: :cascade do |t|
-    t.integer 'recipe_id', null: false
-    t.integer 'tag_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "recipe_tags", force: :cascade do |t|
+    t.integer "recipe_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'recipes', force: :cascade do |t|
-    t.integer 'user_id', null: false
-    t.string 'name', null: false
-    t.text 'introduction', null: false
-    t.text 'note'
-    t.text 'image_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "recipes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name", null: false
+    t.text "introduction", null: false
+    t.text "note"
+    t.text "image_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'steps', force: :cascade do |t|
-    t.integer 'recipe_id', null: false
-    t.text 'explanation', null: false
-    t.text 'image_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "steps", force: :cascade do |t|
+    t.integer "recipe_id", null: false
+    t.text "explanation", null: false
+    t.text "step_image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'tags', force: :cascade do |t|
-    t.string 'name', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "taggings", force: :cascade do |t|
+    t.integer "tag_id"
+    t.string "taggable_type"
+    t.integer "taggable_id"
+    t.string "tagger_type"
+    t.integer "tagger_id"
+    t.string "context", limit: 128
+    t.datetime "created_at"
+    t.index ["context"], name: "index_taggings_on_context"
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+    t.index ["taggable_id", "taggable_type", "context"], name: "taggings_taggable_context_idx"
+    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
+    t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
+    t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
+    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
+    t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'email', default: '', null: false
-    t.string 'encrypted_password', default: '', null: false
-    t.string 'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
-    t.string 'last_name', null: false
-    t.string 'first_name', null: false
-    t.integer 'phone_number', null: falses
-    t.integer 'is_gender', null: false
-    t.string 'nickname'
-    t.text 'introduction'
-    t.text 'image_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['email'], name: 'index_users_on_email', unique: true
-    t.index ['first_name'], name: 'index_users_on_first_name'
-    t.index ['is_gender'], name: 'index_users_on_is_gender'
-    t.index ['last_name'], name: 'index_users_on_last_name'
-    t.index ['phone_number'], name: 'index_users_on_phone_number', unique: true
-    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "taggings_count", default: 0
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.integer "phone_number", null: false
+    t.integer "is_gender", null: false
+    t.string "nickname"
+    t.text "introduction"
+    t.text "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["first_name"], name: "index_users_on_first_name"
+    t.index ["is_gender"], name: "index_users_on_is_gender"
+    t.index ["last_name"], name: "index_users_on_last_name"
+    t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
 end

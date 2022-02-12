@@ -1,0 +1,10 @@
+
+<div class="nested-fields">
+  <div class="row mx-auto">
+    <div class="col-5"><%= f.text_field :explanation, class: "form-control", placeholder: "手順" %></div>
+    <%= f.hidden_field :recipe_id, :value => @recipe.id %>
+    <div class="offset-1 col-1 px-0 w-auto">
+      <%= link_to_remove_association "削除", f, class: "btn btn-secondary btn-block" %>
+    </div>
+  </div>
+</div>

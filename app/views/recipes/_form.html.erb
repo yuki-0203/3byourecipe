@@ -1,0 +1,65 @@
+
+
+  <%= form_with model: @recipe,url: recipes_path, local:true do |f| %>
+
+    <%= f.label :name, "料理名"%>
+  　<%= f.text_field :name,:size =>"100"  %>
+  　<br>
+  　<%= f.attachment_field :image  %>
+    <br>
+  　<%= f.label :introduction, "料理紹介"%>
+  　<%= f.text_area :introduction,:size =>"60" %>
+    <br>
+
+    <%#= f.label :タグ, "タグ"%>
+  　<%#= f.text_field :タグ,:size =>"60" %>
+    <br>
+
+        <%= f.fields_for :materials ,@recipe.materials.build do |t| %>
+      <%= t.label :serving%>
+  　  <%= t.text_field :serving,:size =>"10" %>人分
+
+          <%= render "recipes/material_fields", f: t %>
+
+      <div id="detail-association-insertion-point-material"></div>
+      <div class="col-10 mx-auto mt-2">
+        <%= link_to_add_association "+フォームを追加", f, :materials,
+        class: "btn btn-secondary btn-block",
+        data: {
+        association_insertion_node: '#detail-association-insertion-point-material',
+        }%>
+      </div>
+      <% end %>
+
+      <%= f.fields_for :steps,@recipe.steps.build do |t| %>
+
+          <%= render "recipes/step_fields", f: t %>
+
+      <div id="detail-association-insertion-point-step"></div>
+      <div class="col-10 mx-auto mt-2">
+        <%= link_to_add_association "+フォームを追加", f, :steps,
+        class: "btn btn-secondary btn-block",
+        data: {
+        association_insertion_node: '#detail-association-insertion-point-step',
+        }%>
+      </div>
+      <% end %>
+
+     <%= f.submit '確認画面へ'%>
+    <%= f.hidden_field :recipe_id, :value => @recipe.id %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+<% end %>
+
+
+
+<%#画像プレビュー%>
+  <img id="preview" style="width: 200px;height: 200px;">
+  <script>
+    $('#user_image').on('change', function (e) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#preview").attr('src', e.target.result);
+      }
+      reader.readAsDataURL(e.target.files[0]);
+      });
+  </script>
