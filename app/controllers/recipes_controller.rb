@@ -1,32 +1,22 @@
 class RecipesController < ApplicationController
+
+
   def new
     @recipe = Recipe.new
-    @materials = @recipe.materials.build
-    @steps = @recipe.steps.build
+    @material = @recipe.materials.build
+    @step = @recipe.steps.build
 
   end
 
-  def confirm
-    @recipe = recipe.new(recipe.params)
-    if @recipe.invlid?
-      render 'new'
-    end
-  end
-
-  def back
-    @recipe = recipe.new(recipe.params)
-    render 'new'
-  end
 
   def create
-   @recipe = Recipe.new(recipe_params)
-    if @recipe.save!
-      redirect_to recipe_path(@recipe), notice: "レシピを投稿しました！"
+    @recipe = Recipe.new(recipe_params)
+    if @recipe.save
+      redirect_to recipes_path
     else
-      render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      render :new
     end
   end
-
 
   def index; end
 

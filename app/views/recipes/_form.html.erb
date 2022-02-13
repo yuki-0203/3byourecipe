@@ -6,7 +6,7 @@
 
 <div class="row">
 	<div class="col-md-10 col-sm-10">
-    <%= form_with model: @recipe,url: recipes_path, local:true do |f| %>
+    <%= form_with model: @recipe , url: recipes_path ,local: true do |f| %>
       <%= f.label :name, "レシピ名"%>
     　<%= f.text_field :name,:size =>"100", class: "form-control"%>
   </div>
@@ -28,7 +28,7 @@
 
     <%#----------材料の項目----------------%>
     <div class ="materials mt-2">
-      <%= f.fields_for :materials ,@recipe.materials.build do |t| %>
+      <%= f.fields_for :material ,@recipe.materials.build do |t| %>
           <%= t.label :serving ,"材料・調味料（最大８種類まで）"%>
   　        <%= t.text_field :serving ,:size =>"10" %>人分
   　   <%#----------材料formのテンプレート----------------%>
@@ -51,7 +51,7 @@
     <div id ="steps">
     <%#----------調理手順の項目----------------%>
     <h5>作り方（最大5ステップ）</h5>
-      <%= f.fields_for :steps,@recipe.steps.build do |t| %>
+      <%= f.fields_for :step,@recipe.steps.build do |t| %>
      <%#----------調理手順formのテンプレート----------------%>
      <%= render "recipes/step_fields", f: t %>
      <%#----------調理手順formを以下に追加----------------%>
