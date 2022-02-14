@@ -4,11 +4,11 @@
 
   </head>
 
+<%= form_with model: @recipe , url: recipes_path ,local: true do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
 <div class="row">
 	<div class="col-md-10 col-sm-10">
-    <%= form_with model: @recipe , url: recipes_path ,local: true do |f| %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-      <%= f.label :name, "レシピ名"%>
+    <%= f.label :name, "レシピ名"%>
     　<%= f.text_field :name,:size =>"100", class: "form-control"%>
   </div>
 </div>
@@ -52,19 +52,25 @@
     </div>
   </div>
 </div>
-</div>
+
 <div class="row">
    <div class="col-md-10 col-sm-10 offset-1 mt-4">
     <div id ="steps">
     <%#----------調理手順の項目----------------%>
     <h5>作り方（最大5ステップ）</h5>
-      <%= f.fields_for :steps, local: true do |t| %>
+      <%#= f.fields_for :steps, local: true do |t| %>
         <%#Stepsにrecipe_idを紐付け%>
-        <%= t.hidden_field :recipe_id, value: @recipe.id %>
+        <%#= t.hidden_field :recipe_id, value: @recipe.id %>
      <%#----------調理手順formのテンプレート----------------%>
-     <%= render "recipes/step_fields", f: t %>
+     <%#= render "recipes/step_fields", f: t %>
      <%#----------調理手順formを以下に追加----------------%>
-      <div id="detail-association-insertion-point-step"></div>
+     <div class="step-no">
+       <div id="detail-association-insertion-point-step">
+        <%= f.fields_for :steps do |t| %>
+          <% render 'step_fields', f: t %>
+        <% end %>
+      </div>
+      </div>
        <%#----------調理手順formの追加ボタン----------------%>
       <div class="col-10 mx-auto mt-2">
         <%= link_to_add_association "+フォームを追加", f, :steps,
@@ -72,8 +78,10 @@
         data: {
         association_insertion_node: '#detail-association-insertion-point-step',
         }%>
+
+
       </div>
-      <% end %>
+      <%# end %>
     </div>
   </div>
 </div>
@@ -86,9 +94,10 @@
 <div class="row">
    <div class="col-md-10 col-sm-10 offset-1 mt-3">
        <%= f.submit '確認画面へ'%>
-      <% end %>
+
   </div>
 </div>
+<% end %>
 
 <script>
 $(document).on("turbolinks:load", function(){

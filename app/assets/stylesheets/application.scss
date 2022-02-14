@@ -64,3 +64,15 @@ a, a:visited, a:focus, a:hover {
   object-fit: cover !important; /* 縦横比固定したまま上2つの縦横の範囲内に収まるように配置する */
  }
 }
+
+.step-no {
+  counter-reset: rank;
+}
+
+.step-no .step-label::before {
+  counter-increment: rank;
+  content: counter(rank) "位";
+  color: #bf0000;
+  font-weight: 700;
+  line-height: initial;
+}
