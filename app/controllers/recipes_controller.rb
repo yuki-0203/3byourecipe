@@ -3,19 +3,13 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    @material = @recipe.materials.build
-    @step = @recipe.steps.build
-
+    @materials = @recipe.materials.build
+    @steps = @recipe.steps.build
   end
 
-
   def create
-    @recipe = Recipe.new(recipe_params)
-    if @recipe.save
+    @recipe = Recipe.create(recipe_params)
       redirect_to recipes_path
-    else
-      render :new
-    end
   end
 
   def index; end
@@ -31,7 +25,7 @@ class RecipesController < ApplicationController
   private
 
     def recipe_params
-      params.require(:recipe).permit(:name, :introduction, :note , :image,:user_id,
+      params.require(:recipe).permit(:name, :introduction, :note , :image,:user_id,:tag_list,
                                steps_attributes: [:id,:explanation,:image,:recipe_id, :_destroy],
                                materials_attributes: [:id,:name,:recipe_id,:quantity,:serving, :_destroy] )
     end

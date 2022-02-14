@@ -9,6 +9,6 @@ class Recipe < ApplicationRecord
   has_many :impression, dependent: :destroy
 
   attachment :image
-
+  acts_as_taggable #タグ
 
 end
