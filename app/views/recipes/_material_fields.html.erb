@@ -3,7 +3,6 @@
   <div class="row mx-auto">
     <div class="field col-5 m-1"><%= f.text_field :name, placeholder: "材料", class: 'form-control js-material-form' %></div>
     <div class="field col-2 m-1"><%= f.text_field :quantity, class: "form-control", placeholder: "分量" %></div>
-    <%= f.hidden_field :recipe_id, :value => @recipe.id %>
     <div class="field col-2 m-1">
       <%= link_to_remove_association "削除", f, id: 'remove-btn', class: "btn btn-secondary" %>
     </div>

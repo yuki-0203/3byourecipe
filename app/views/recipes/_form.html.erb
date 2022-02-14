@@ -4,8 +4,8 @@
 
   </head>
 
-<%= form_with model: @recipe , url: recipes_path ,local: true do |f| %>
-<%= f.hidden_field :user_id, value: current_user.id %>
+  <%= form_with model: @recipe , url: recipes_path ,local: true do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
 <div class="row">
 	<div class="col-md-10 col-sm-10">
     <%= f.label :name, "レシピ名"%>
@@ -32,9 +32,9 @@
     <%#----------材料の項目----------------%>
     <div class ="materials mt-2">
       <%= f.label :serving ,"材料・調味料（最大８種類まで）"%>
-     <%= f.text_field :serving ,:size =>"10" %>人分
+       <%= f.text_field :serving ,:size =>"10" %>人分
 
-      <%= f.fields_for :materials , local: true do |t| %>
+    <%= f.fields_for :materials , local: true do |t| %>
         <%#Materialsにrecipe_idを紐付け%>
         <%= t.hidden_field :recipe_id, value: @recipe.id %>
 
@@ -58,15 +58,12 @@
     <div id ="steps">
     <%#----------調理手順の項目----------------%>
     <h5>作り方（最大5ステップ）</h5>
-      <%#= f.fields_for :steps, local: true do |t| %>
-        <%#Stepsにrecipe_idを紐付け%>
-        <%#= t.hidden_field :recipe_id, value: @recipe.id %>
-     <%#----------調理手順formのテンプレート----------------%>
-     <%#= render "recipes/step_fields", f: t %>
+      <%= f.fields_for :steps, local: true do |t| %>
      <%#----------調理手順formを以下に追加----------------%>
      <div class="step-no">
        <div id="detail-association-insertion-point-step">
         <%= f.fields_for :steps do |t| %>
+     <%#----------調理手順formのテンプレート----------------%>
           <% render 'step_fields', f: t %>
         <% end %>
       </div>
@@ -78,10 +75,8 @@
         data: {
         association_insertion_node: '#detail-association-insertion-point-step',
         }%>
-
-
       </div>
-      <%# end %>
+      <% end %>
     </div>
   </div>
 </div>
@@ -97,7 +92,7 @@
 
   </div>
 </div>
-<% end %>
+    <% end %>
 
 <script>
 $(document).on("turbolinks:load", function(){

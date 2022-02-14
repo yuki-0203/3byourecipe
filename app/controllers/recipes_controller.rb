@@ -8,8 +8,12 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.create(recipe_params)
-    redirect_to recipes_path
+    @recipe = Recipe.new(recipe_params)
+    if @recipe.save!
+        redirect_to recipes_path
+    else
+      render 'new'
+    end
   end
 
   def index; end
@@ -30,8 +34,8 @@ class RecipesController < ApplicationController
   private
 
     def recipe_params
-      params.require(:recipe).permit(:name, :introduction, :note , :image,:user_id,:tag_list,:serving,
-                               steps_attributes: [:id,:explanation,:_destroy],
+      params.require(:recipe).permit(:id,:name, :introduction, :note , :image,:user_id,:tag_list,:serving,
+                               steps_attributes: [:id,:explanation,:image,:recipe_id, :_destroy],
                                materials_attributes: [:id,:name,:recipe_id,:quantity, :_destroy] )
     end
 end
