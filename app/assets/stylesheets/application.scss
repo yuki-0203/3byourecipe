@@ -54,3 +54,13 @@ a, a:visited, a:focus, a:hover {
 }
 
 
+
+// プロフィール画像を丸く加工
+.profile_image {
+  img{
+  border-radius: 50% !important; /* 角丸半径を50%にする(=円形にする) */
+  width: 100px !important;  /* 縦横を同じ値にする */
+  height: 100px !important; /* 縦横を同じ値にする */
+  object-fit: cover !important; /* 縦横比固定したまま上2つの縦横の範囲内に収まるように配置する */
+ }
+}

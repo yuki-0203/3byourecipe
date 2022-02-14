@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :phone_number, presence: true
   validates :email, presence: true
-  validates :is_gender, presence: true
-  validates :password, presence: true
+  validates :password_confirmation, presence: true, on: :create
+  validates :password, presence: true, unless: :uid?, on: :create
 
 end

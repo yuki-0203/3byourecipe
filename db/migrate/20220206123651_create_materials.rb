@@ -4,7 +4,6 @@ class CreateMaterials < ActiveRecord::Migration[5.2]
       t.integer :recipe_id, null: false
       t.string  :name, null: false
       t.string  :quantity, null: false
-      t.integer :serving, null: false
       t.timestamps
     end
   end

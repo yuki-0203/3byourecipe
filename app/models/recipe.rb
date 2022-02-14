@@ -8,7 +8,17 @@ class Recipe < ApplicationRecord
   has_many :recipe_tags, dependent: :destroy
   has_many :impression, dependent: :destroy
 
+  validates :user_id, presence: true
+  validates :name, presence: true
+  validates :introduction, presence: true
+  validates :serving, presence: true
+  validates :image_id, presence: true
+
+
+
   attachment :image
   acts_as_taggable #タグ
+  
+  
 
 end

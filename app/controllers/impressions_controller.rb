@@ -1,15 +1,49 @@
 class ImpressionsController < ApplicationController
-  def new; end
+  def new
+    @impression = Impression.new
+    @recipe = Recipe.find(params[:id])
+  end
 
-  def create; end
+  def create
+    @impression = Impression.new(impression_params)
+    if @impression.save
+      redirect_to root_path
+    else
+      render 'new'
+    end
+  end
 
-  def index; end
+  def index
+    @recipe = Recipe.find(params[:id])
+    @impressions = Impression.where(recipe_id: @recipe.id)
+  end
 
-  def show; end
+  def show
+    @impression = Impression.find(params[:id])
+  end
 
-  def edit; end
+  def edit
+    @impression = Impression.find(params[:id])
+  end
 
-  def update; end
+  def update
+     @impression = Impression.find(params[:id])
+    if @impression.update
+      redirect_to root_path
+    else
+      render 'edit'
+    end
+  end
 
-  def destroy; end
+  def destroy
+    @impression = Impression.find(params[:id])
+  if impression.user_id == current_user.id
+   impression.destroy
+  end
+  end
+
+
+    private
+    def impression_params
+      params.recipe(:impression).permit(:recipe_id,:user_id,:impression,:image,:reply_comment)
 end

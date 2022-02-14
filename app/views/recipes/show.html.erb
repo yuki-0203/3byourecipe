@@ -1,0 +1,61 @@
+<h2>投稿プレビュー</h4>
+
+
+<div class="row">
+	<div class="col-md-10 col-sm-10">
+      <%#=レシピ名%>
+    　<%= @recipe.name%>
+  </div>
+</div>
+<div class="row">
+	<div class="col-md-3 col-sm-3">
+  　<div class="recipe_image">
+          <%= attachment_image_tag @recipe, :image, fallback: "no-image-recipe.png", id: "img_prev", style: "height: 200px; width:200px;" %>
+     </div>
+  </div>
+  <div class="col-md-9 col-sm-9 mt-2">
+      　<%#=料理紹介%>
+      　<%= @recipe.introduction%>
+      　<%#=タグ%>
+      <% if @tags.present? %>
+      <%= @tags.each do |tag| %>
+        <%= tag.name %>
+        <% end %>
+        <%#= link_to "#{tag.name}(#{tag.taggings_count})", tags_path(tag.name) %>
+      <% else %>
+      <%= 登録されているタグはありません %>
+      <% end %>
+
+    <%#----------材料----------------%>
+    <div class ="materials mt-2">
+          <h5>材料・調味料（最大８種類まで）</h5>
+            <% @recipe.serving %>人分
+  　       <table>
+              <%= @materials.each do |material| %>
+  　         <tr>
+            <td><%= material.name %></td>
+            <td><%= material.quantity %></td>
+  　         </tr>
+  　         <% end %>
+  　       </table>
+  　   </div>
+  </div>
+ </div>
+
+<div class="row">
+   <div class="col-md-10 col-sm-10 offset-1 mt-4">
+    <div id ="steps">
+          <h5>作り方（最大５手順まで）</h5>
+              <%= @steps.each do |step|%>
+              <%= step.explanation %>
+  　         <% end %>
+  　 </div>
+    </div>
+  </div>
+
+<div class="row">
+   <div class="col-md-10 col-sm-10 offset-1 mt-1">
+      <h5>備考</h5>
+    　<%= @recipe.note %>
+    </div>
+</div>

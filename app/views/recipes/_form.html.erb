@@ -31,17 +31,19 @@
 
     <%#----------材料の項目----------------%>
     <div class ="materials mt-2">
-      <%= f.fields_for :materials ,@recipe.materials.build do |t| %>
+      <%= f.label :serving ,"材料・調味料（最大８種類まで）"%>
+     <%= f.text_field :serving ,:size =>"10" %>人分
+
+      <%= f.fields_for :materials , local: true do |t| %>
         <%#Materialsにrecipe_idを紐付け%>
         <%= t.hidden_field :recipe_id, value: @recipe.id %>
-          <%= t.label :serving ,"材料・調味料（最大８種類まで）"%>
-  　        <%= t.text_field :serving ,:size =>"10" %>人分
+
   　   <%#----------材料formのテンプレート----------------%>
           <%= render "recipes/material_fields", f: t %>
       <%#----------材料formを以下に追加----------------%>
           <div id="detail-association-insertion-point-material"></div>
      <%#----------材料formの追加ボタン----------------%>
-          <%= link_to_add_association "+フォームを追加", f, :materials,
+          <%= link_to_add_association "+フォームを追加",f,:materials,
             class: "btn btn-secondary btn-block col-4 mt-2",
             data: {
             association_insertion_node: '#detail-association-insertion-point-material',
@@ -56,7 +58,7 @@
     <div id ="steps">
     <%#----------調理手順の項目----------------%>
     <h5>作り方（最大5ステップ）</h5>
-      <%= f.fields_for :steps,@recipe.steps.build do |t| %>
+      <%= f.fields_for :steps, local: true do |t| %>
         <%#Stepsにrecipe_idを紐付け%>
         <%= t.hidden_field :recipe_id, value: @recipe.id %>
      <%#----------調理手順formのテンプレート----------------%>

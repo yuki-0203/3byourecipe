@@ -1,0 +1,29 @@
+<h4>脱レポ</h4>
+ <%= form_with model: @impression , url: recipe_impressions_path ,local: true do |f| %>
+ <%= attachment_image_tag @impression, :image, fallback: "no-image-recipe.png", id: "img_prev", style: "height: 200px; width:200px;" %>
+  <br>
+  <%= f.attachment_field :image %>
+   <%= f.label :impression, "コメント"%>
+    <%= f.text_area :impression,:size =>"300", class: "form-control"%>
+
+       <%= f.submit '脱レポを送る'%>
+      <% end %>
+
+
+
+<script>
+$(document).on("turbolinks:load", function(){
+  function readURL(input) {
+    if(input.files && input.files[0]){
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#img_prev').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $("#post_post_image").change(function(){
+    readURL(this);
+  });
+});
+</script>

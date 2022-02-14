@@ -1,0 +1,16 @@
+<h2>脱レポ一覧</h2>
+
+<%= render "impressions/recipe_about" %>
+
+<p>脱レポ (全 <%= @impressions.count %>件)</p>
+    <%= link_to "脱レポを投稿", new_recipe_impression_path(@recipe.id) %>
+
+    <%= @impressions.each do |impression| %>
+    <%= link_to impression_path(impression) do %>
+      <%= attachment_image_tag impression, :image, fallback: "no-image-recipe.png", style: "height: 50px; width:50px;" %>
+      <%= impression.impression %>
+      <%= link_to impression.user.name, user_path(impression.user) %>
+    <% end %>
+
+
+<%= render "impressions/recipe_link" %>

@@ -2,7 +2,7 @@
 
 <tr>
   <div class ="profile_image">
-  <td><%= attachment_image_tag(@user, :image, :fill, 50, 50, fallback: "no-image-icon.png") %></td></div>
+  <td><%= attachment_image_tag(@user, :image, :fill, 100, 100, fallback: "no-image-icon.png") %></td></div>
   <td><%= @user.nickname %></td>
    <td><%= @user.introduction %></td>
   <td><%=link_to "プロフィール編集", profile_users_path(@user)%></td>

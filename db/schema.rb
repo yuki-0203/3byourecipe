@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 2022_02_14_012564) do
     t.integer "recipe_id", null: false
     t.string "name", null: false
     t.string "quantity", null: false
-    t.integer "serving", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -42,6 +41,7 @@ ActiveRecord::Schema.define(version: 2022_02_14_012564) do
     t.integer "user_id", null: false
     t.string "name", null: false
     t.text "introduction", null: false
+    t.integer "serving", null: false
     t.text "note"
     t.text "image_id", null: false
     t.datetime "created_at", null: false
