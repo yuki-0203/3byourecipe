@@ -57,11 +57,48 @@
     </div>
 </div>
 
-<%#=脱レポゾーン%>
+<h6>脱レポ</h6>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    脱レポを投稿する
+  </button>
+  <% if @impressions.exists? %>
+    <%= render "impressions/index" %>
+      <%= link_to ">>脱レポ投稿一覧へ",recipe_impressions_path(@recipe.id) %>
+
+  <% else %>
+       脱レポの投稿はまだありません
+  <% end %>
 
 <% if @recipe.user_id = current_user %>
-  <%= link_to "レシピを編集する", edit_recipe_path(@recipe) %>
+  <%= link_to "レシピを編集する", edit_recipe_path(@recipe.id) %>
   <%= link_to "レシピを削除する", recipe_path(@recipe),data: {confirm: '本当に削除しますか？'}, method: :delete %>
 <% end %>
 
 <%= link_to "<< レシピ一覧へ",recipes_path %>
+
+  <!-- モーダルの設定 -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">脱レポを投稿</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           <%= form_with model: [@recipe,@impression] , url: recipe_impressions_path(@recipe.id) ,local: true do |f| %>
+           <%= f.label :image, "作った料理画像 （任意）"%>
+           <%= f.attachment_field :image %>
+            <br>
+             <%= f.label :impression, "感想 (必須)"%>
+              <%= f.text_area :impression,:size =>"300", class: "form-control"%>
+          </div>
+                  <div class="modal-footer">
+                    <%= f.submit '脱レポを送る'%>
+                     <% end %>
+                    <%= link_to "レシピに戻る", recipe_path(@recipe)%>
+        </div><!-- /.modal-footer -->
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->

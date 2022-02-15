@@ -1,0 +1,14 @@
+ <div class="row row-cols-1 row-cols-md-3 g-4 m-2">
+   <div class="card-group">
+     <% @impressions.each do |impression| %>
+        <div class="col">
+           <div class="card ">
+        <%= attachment_image_tag impression, :image, fallback: "no-image-recipe.png", class: 'card-img-top' %>
+        <p class="card-text "><%=impression.impression %></p>
+        <p class="card-text text-center">by <small><%= link_to  impression.user.nickname,user_path(impression.user) %></small>
+         <%= attachment_image_tag impression.user, :image, :fill, 30, 30, fallback: "no-image-icon.png" %></p>
+           </div>
+      </div>
+      <% end %>
+      </div>
+  </div>

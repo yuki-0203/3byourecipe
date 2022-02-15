@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # resipes,favorites,impressionsコントローラ
   resources :recipes  do
      resource :favorites, only: %i[create destroy]
-     resources :impressions
+     resources :impressions , only: %i[index create destroy]
   end
 
   # stepsコントローラ

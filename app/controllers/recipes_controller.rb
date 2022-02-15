@@ -29,6 +29,8 @@ class RecipesController < ApplicationController
    @tags = @recipe.tag_counts_on(:tags)
    @materials = @recipe.materials
    @steps = @recipe.steps
+   @impression = @recipe.impression.new
+   @impressions = Impression.where(recipe_id: @recipe.id)
   end
 
    def edit

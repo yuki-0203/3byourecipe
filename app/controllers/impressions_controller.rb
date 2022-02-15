@@ -1,11 +1,9 @@
 class ImpressionsController < ApplicationController
-  def new
-    @impression = Impression.new
-    @recipe = Recipe.find(params[:id])
-  end
 
   def create
-    @impression = Impression.new(impression_params)
+    @impression = current_user.impressions.new(impression_params)
+    recipe = Recipe.find(params[:recipe_id])
+    @impression.recipe_id = recipe.id
     if @impression.save
       redirect_to root_path
     else
@@ -14,25 +12,8 @@ class ImpressionsController < ApplicationController
   end
 
   def index
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
     @impressions = Impression.where(recipe_id: @recipe.id)
-  end
-
-  def show
-    @impression = Impression.find(params[:id])
-  end
-
-  def edit
-    @impression = Impression.find(params[:id])
-  end
-
-  def update
-     @impression = Impression.find(params[:id])
-    if @impression.update
-      redirect_to root_path
-    else
-      render 'edit'
-    end
   end
 
   def destroy
@@ -45,5 +26,6 @@ class ImpressionsController < ApplicationController
 
     private
     def impression_params
-      params.recipe(:impression).permit(:recipe_id,:user_id,:impression,:image,:reply_comment)
+      params.require(:impression).permit(:recipe_id,:user_id,:impression,:image,:reply_comment)
+    end
 end

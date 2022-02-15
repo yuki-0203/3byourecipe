@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 2022_02_15_044108) do
     t.integer "user_id", null: false
     t.text "impression", null: false
     t.text "image_id"
-    t.text "reply_comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
