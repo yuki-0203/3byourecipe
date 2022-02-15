@@ -1,5 +1,6 @@
 <p>レシピ</p>
     <%= link_to recipe_path(@recipe) do %>
     <%= attachment_image_tag @recipe, :image, fallback: "no-image-recipe.png", style: "height: 100px; width:100px;" %>
-    <%= link_to  @recipe.user.name, user_path(@recipe.user)  %>
+    <% end %>
+    <%= link_to  @recipe.user.nickname, user_path(@recipe.user)  %>
     <%= link_to  @recipe.name,recipe_path(@recipe) %>

@@ -17,6 +17,11 @@ class RecipesController < ApplicationController
   end
 
   def index
+    #step数別にレシピ表示
+    @recipe_step_2 = Recipe.where(steps_count: "2").page(params[:page]).per(8)
+    @recipe_step_3 = Recipe.where(steps_count: "3").page(params[:page]).per(8)
+    @recipe_step_4 = Recipe.where(steps_count: "4").page(params[:page]).per(8)
+    @recipe_step_5 = Recipe.where(steps_count: "5").page(params[:page]).per(8)
   end
 
   def show
@@ -49,7 +54,7 @@ class RecipesController < ApplicationController
   private
 
     def recipe_params
-      params.require(:recipe).permit(:id,:name, :introduction, :note , :image,:user_id,:tag_list,:serving,
+      params.require(:recipe).permit(:id,:name, :introduction, :note , :image,:user_id,:tag_list,:serving,:steps_count,
                                steps_attributes: [:id,:explanation,:image,:recipe_id, :_destroy],
                                materials_attributes: [:id,:name,:recipe_id,:quantity, :_destroy] )
     end
