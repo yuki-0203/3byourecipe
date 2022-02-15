@@ -1,11 +1,11 @@
-<h2>投稿プレビュー</h4>
-
 
 <div class="row">
 	<div class="col-md-10 col-sm-10">
       <%#=レシピ名%>
     　<%= @recipe.name%>
   </div>
+  <%#=お気に入り数%>
+  <%#=お気に入り登録%>
 </div>
 <div class="row">
 	<div class="col-md-3 col-sm-3">
@@ -18,20 +18,17 @@
       　<%= @recipe.introduction%>
       　<%#=タグ%>
       <% if @tags.present? %>
-      <%= @tags.each do |tag| %>
-        <%= tag.name %>
-        <% end %>
-        <%#= link_to "#{tag.name}(#{tag.taggings_count})", tags_path(tag.name) %>
-      <% else %>
-      <%= 登録されているタグはありません %>
+      <% @tags.each do |tag| %>
+        <%= link_to "＃#{tag.name}", tags_path(tag.name) %>
       <% end %>
+    <% end %>
 
     <%#----------材料----------------%>
     <div class ="materials mt-2">
-          <h5>材料・調味料（最大８種類まで）</h5>
-            <% @recipe.serving %>人分
+          <h5>材料・調味料</h5>
+            <%= @recipe.serving %>人分
   　       <table>
-              <%= @materials.each do |material| %>
+              <% @materials.each do |material| %>
   　         <tr>
             <td><%= material.name %></td>
             <td><%= material.quantity %></td>
@@ -45,8 +42,8 @@
 <div class="row">
    <div class="col-md-10 col-sm-10 offset-1 mt-4">
     <div id ="steps">
-          <h5>作り方（最大５手順まで）</h5>
-              <%= @steps.each do |step|%>
+          <h5>作り方</h5>
+              <% @steps.each do |step|%>
               <%= step.explanation %>
   　         <% end %>
   　 </div>
@@ -59,3 +56,12 @@
     　<%= @recipe.note %>
     </div>
 </div>
+
+<%#=脱レポゾーン%>
+
+<% if @recipe.user_id = current_user %>
+  <%= link_to "レシピを編集する", edit_recipe_path(@recipe) %>
+  <%= link_to "レシピを削除する", recipe_path(@recipe),data: {confirm: '本当に削除しますか？'}, method: :delete %>
+<% end %>
+
+<%= link_to "<< レシピ一覧へ",recipes_path %>

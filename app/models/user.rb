@@ -14,6 +14,6 @@ class User < ApplicationRecord
   validates :phone_number, presence: true
   validates :email, presence: true
   validates :password_confirmation, presence: true, on: :create
-  validates :password, presence: true, unless: :uid?, on: :create
+  validates :password, presence: true, unless: :id?, on: :create
 
 end

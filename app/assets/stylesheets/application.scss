@@ -66,12 +66,12 @@ a, a:visited, a:focus, a:hover {
 }
 
 .step-no {
-  counter-reset: rank;
+  counter-reset: step;
 }
 
 .step-no .step-label::before {
-  counter-increment: rank;
-  content: counter(rank) "位";
+  counter-increment: step;
+  content: counter(step);
   color: #bf0000;
   font-weight: 700;
   line-height: initial;
