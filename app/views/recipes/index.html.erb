@@ -1,66 +1,69 @@
-<%#=注目レシピ%>
 
-<h4 class="m-3">レシピ一覧</h4>
-
+<%#----------タブリンクの結果--------------------------------%>
 <% if @tag_recipe.present? %>
-  <%= "#{@tag} に関連する投稿" %>
-  <% @tag_recipe.each do |tag_recipe| %>
-    <%= tag_recipe.name %>
-  <% end %>
-<% end %>
+    <%= "#{@tag} に関連する投稿" %>
+       <%= render "recipes/recipe_cardgroup", recipes: @tag_recipe %>
+<% else %>
 
+<%#----------TOP---------------------------------------------%>
+      <%#=注目レシピ%>
+<h4 class="m-3">レシピ一覧</h4>
+       <ul class="nav nav-tabs justify-content-center text-center mt-5">
+          <li class="nav-item">
+            <a href="#contents1" class="nav-link active mr-2" data-toggle="tab">２ステップ</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contents2" class="nav-link mr-2" data-toggle="tab">３ステップ</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contents3" class="nav-link mr-2" data-toggle="tab">４ステップ</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contents4" class="nav-link mr-2" data-toggle="tab">５ステップ</a>
+          </li>
+        </ul>
 
- <ul class="nav nav-tabs justify-content-center text-center mt-5">
-    <li class="nav-item">
-      <a href="#contents1" class="nav-link active mr-2" data-toggle="tab">２ステップ</a>
-    </li>
-    <li class="nav-item">
-      <a href="#contents2" class="nav-link mr-2" data-toggle="tab">３ステップ</a>
-    </li>
-    <li class="nav-item">
-      <a href="#contents3" class="nav-link mr-2" data-toggle="tab">４ステップ</a>
-    </li>
-    <li class="nav-item">
-      <a href="#contents4" class="nav-link mr-2" data-toggle="tab">５ステップ</a>
-    </li>
-  </ul>
+  <%#----------タブ内容---------------------------------------------%>
 <div class="tab-content">
-    <div id="contents1" class="tab-pane active">
-        <p>
-後で入れる
-        </p>
-    </div>
-    <div id="contents2" class="tab-pane">
-        <% if @recipe_step_3.exists? %>
-          <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="card-group">
-                  <% @recipe_step_3.each do |step3| %>
-                  <div class="col">
-                    <div class="card">
-                         <%= link_to recipe_path(step3) do %>
-                         <%= attachment_image_tag step3, :image, fallback: "no-image-recipe.png", class: 'card-img-top' %>
-                        <% end %>
-                        <h5 class="card-title text-center  font-weight-bold"><%= link_to  step3.name,recipe_path(step3) %></h5>
-                        <p class="card-text ">お気に入り登録 🤍<%= step3.favorites.count %></p>
-                        <p class="card-text text-center">by <small><%= link_to  step3.user.nickname,user_path(step3.user) %></small>
-                      <%= attachment_image_tag step3.user, :image, :fill, 30, 30, fallback: "no-image-icon.png" %></p>
-                  </div>
-                </div>
-                  <% end %>
-            </div>
-          <% else %>
-            該当のレシピはありません
-          <% end %>
+    <%#----------2step-----------------------%>
+          <div id="contents1" class="tab-pane active"> 
+              <% if @recipe_step_2.exists? %>
+                  <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_2 %>
+                <% else %>
+                  該当のレシピはありません
+                <% end %>
+                <%#=ページネーション%>
+                <div class="text-center mt-3"><%= paginate @recipe_step_2 %></div>
+          </div>
+     <%#----------3step-----------------------%>
+          <div id="contents2" class="tab-pane">
+              <% if @recipe_step_3.exists? %>
+                  <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_3 %>
+                <% else %>
+                  該当のレシピはありません
+                <% end %>
+                <%#=ページネーション%>
+                <div class="text-center mt-3"><%= paginate @recipe_step_3 %></div>
+          </div>
+    <%#----------4step-----------------------%>
+          <div id="contents3" class="tab-pane">
+              <% if @recipe_step_4.exists? %>
+                  <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_4 %>
+                <% else %>
+                  該当のレシピはありません
+                <% end %>
+                <%#=ページネーション%>
+                <div class="text-center mt-3"><%= paginate @recipe_step_4 %></div>
+          </div>
+  <%#----------5step-----------------------%>
+          <div id="contents4" class="tab-pane">
+              <% if @recipe_step_5.exists? %>
+                  <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_5 %>
+                <% else %>
+                  該当のレシピはありません
+                <% end %>
+                <%#=ページネーション%>
+                <div class="text-center mt-3"><%= paginate @recipe_step_5 %></div>
+          </div>
       </div>
-                  <%#=ページネーション%>
-          <div class="text-center mt-3"><%= paginate @recipe_step_3 %></div>
-    </div>
-
-    <div id="contents3" class="tab-pane">
-        <p>後で入れる</p>
-    </div>
-    <div id="contents4" class="tab-pane">
-        <p>後で入れる</p>
-    </div>
-</div>
-
+<% end %>
