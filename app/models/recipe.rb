@@ -16,6 +16,4 @@ class Recipe < ApplicationRecord
   attachment :image
   acts_as_taggable #タグ
 
-
-
 end

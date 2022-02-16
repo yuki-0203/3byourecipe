@@ -35,7 +35,7 @@
                          <%= attachment_image_tag step3, :image, fallback: "no-image-recipe.png", class: 'card-img-top' %>
                         <% end %>
                         <h5 class="card-title text-center  font-weight-bold"><%= link_to  step3.name,recipe_path(step3) %></h5>
-                        <p class="card-text ">お気に入り登録  <%= image_tag 'favorit.png',style: "height: 40px; width:40px;" %>３０</p>
+                        <p class="card-text ">お気に入り登録 🤍<%= step3.favorites.count %></p>
                         <p class="card-text text-center">by <small><%= link_to  step3.user.nickname,user_path(step3.user) %></small>
                       <%= attachment_image_tag step3.user, :image, :fill, 30, 30, fallback: "no-image-icon.png" %></p>
                   </div>

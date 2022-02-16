@@ -5,6 +5,9 @@
            <div class="card ">
         <%= attachment_image_tag impression, :image, fallback: "no-image-recipe.png", class: 'card-img-top' %>
         <p class="card-text "><%=impression.impression %></p>
+        <% if impression.user == current_user %>
+         <%= link_to "削除", recipe_impression_path(@recipe,impression),data: {confirm: '本当に削除しますか？'}, method: :delete %>
+        <% end %>
         <p class="card-text text-center">by <small><%= link_to  impression.user.nickname,user_path(impression.user) %></small>
          <%= attachment_image_tag impression.user, :image, :fill, 30, 30, fallback: "no-image-icon.png" %></p>
            </div>

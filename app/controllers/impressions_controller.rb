@@ -5,7 +5,7 @@ class ImpressionsController < ApplicationController
     recipe = Recipe.find(params[:recipe_id])
     @impression.recipe_id = recipe.id
     if @impression.save
-      redirect_to root_path
+      redirect_to recipe_path(recipe)
     else
       render 'new'
     end
@@ -17,10 +17,9 @@ class ImpressionsController < ApplicationController
   end
 
   def destroy
-    @impression = Impression.find(params[:id])
-  if impression.user_id == current_user.id
-   impression.destroy
-  end
+    recipe = Recipe.find(params[:recipe_id])
+      Impression.find(params[:id]).destroy
+      redirect_to recipe_path(recipe)
   end
 
 

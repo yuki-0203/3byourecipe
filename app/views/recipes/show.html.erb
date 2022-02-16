@@ -4,8 +4,10 @@
       <%#=レシピ名%>
     　<%= @recipe.name%>
   </div>
-  <%#=お気に入り数%>
   <%#=お気に入り登録%>
+  <span id="favorite_buttons_<%= @recipe.id %>">
+    <%= render "favorites/favorite", recipe: @recipe %>
+  </span>
 </div>
 <div class="row">
 	<div class="col-md-3 col-sm-3">
