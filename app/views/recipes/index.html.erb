@@ -2,6 +2,12 @@
 
 <h4 class="m-3">レシピ一覧</h4>
 
+<% if @tag_recipe.present? %>
+  <%= "#{@tag} に関連する投稿" %>
+  <% @tag_recipe.each do |tag_recipe| %>
+    <%= tag_recipe.name %>
+  <% end %>
+<% end %>
 
 
  <ul class="nav nav-tabs justify-content-center text-center mt-5">

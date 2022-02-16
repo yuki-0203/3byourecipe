@@ -1,0 +1,27 @@
+
+
+<%#=--------タグ検索結果---------%>
+<% if @tag_recipe.present? %>
+  <%= "#{@tag} に関連する投稿" %>
+  <% @tag_recipe.each do |tag_recipe| %>
+    <%= tag_recipe.name %>
+  <% end %>
+  
+<%#=--------レシピ名キーワード検索結果---------%>
+<% else %>
+      <% if params[:q][:name_cont] == "" %>
+      <%= "検索キーワードがありません" %> <%#--空白検索をした時に表示--%>
+    <% elsif @search_recipes.present? %>
+      <%= "「#{params[:q][:name_cont]}」の検索結果: #{@search_recipes.count}件" %>
+    
+    
+    <% else %>
+      <%= "検索に一致するレシピはありませんでした" %>
+    <% end %>
+
+  
+  
+  
+<% end %>
+
+

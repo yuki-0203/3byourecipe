@@ -22,6 +22,10 @@ class RecipesController < ApplicationController
     @recipe_step_3 = Recipe.where(steps_count: "3").page(params[:page]).per(8)
     @recipe_step_4 = Recipe.where(steps_count: "4").page(params[:page]).per(8)
     @recipe_step_5 = Recipe.where(steps_count: "5").page(params[:page]).per(8)
+    if @tag = params[:tag_name]  # タグ検索用
+     #binding.pry
+      @tag_recipe = Recipe.tagged_with(params[:tag_name])   # タグに紐付く投稿
+    end
   end
 
   def show
@@ -56,7 +60,7 @@ class RecipesController < ApplicationController
   private
 
     def recipe_params
-      params.require(:recipe).permit(:id,:name, :introduction, :note , :image,:user_id,:tag_list,:serving,:steps_count,
+      params.require(:recipe).permit(:id,:name, :introduction, :note , :image,:user_id,:tag_list,:serving,:steps_count,:tag_name,
                                steps_attributes: [:id,:explanation,:image,:recipe_id, :_destroy],
                                materials_attributes: [:id,:name,:recipe_id,:quantity, :_destroy] )
     end

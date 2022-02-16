@@ -9,8 +9,8 @@ Rails.application.routes.draw do
      resources :impressions , only: %i[index create destroy]
   end
 
-  # stepsコントローラ
-  resources :materials, :steps, :tags, only: %i[create update destroy]
+  # materials,stepsコントローラ
+  resources :materials, :steps, only: %i[create update destroy]
 
   # seachsコントローラ
   resources :seachs, only: [:index]
