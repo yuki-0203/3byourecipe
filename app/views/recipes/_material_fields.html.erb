@@ -3,8 +3,8 @@
   <div class="row mx-auto">
     <div class="field col-5 m-1"><%= f.text_field :name, placeholder: "材料", class: 'form-control js-material-form' %></div>
     <div class="field col-2 m-1"><%= f.text_field :quantity, class: "form-control", placeholder: "分量" %></div>
-    <div class="field col-2 m-1">
-      <%= link_to_remove_association "削除", f, id: 'remove-btn', class: "btn btn-secondary" %>
+    <div class="field col-1 m-1">
+      <%= link_to_remove_association "#{icon 'fas', 'trash-alt'}".html_safe, f, id: 'remove-btn', class: "btn btn-outline-secondary btn-block" %>
     </div>
   </div>
 </div>

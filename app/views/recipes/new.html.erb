@@ -33,8 +33,8 @@
       <%= f.label :serving ,"材料・調味料（最大８種類まで）"%>
        <%= f.text_field :serving ,:size =>"10" %>人分
      <%#----------材料formの追加ボタン----------------%>
-          <%= link_to_add_association "+フォームを追加",f,:materials,
-            class: "btn btn-secondary btn-block col-4 mt-2",
+          <%= link_to_add_association "＋追加",f,:materials,
+            class: "btn btn-info btn-block col-2 ",
             data: { association_insertion_method: 'append' }%>
         <%#----------fields_for----------------%>
           <%= f.fields_for :materials , local: true do |t| %>
@@ -52,8 +52,8 @@
     <h5>作り方（最大5ステップ）</h5>
        <%#----------調理手順formの追加ボタン----------------%>
       <div class="step-no">
-        <%= link_to_add_association "+フォームを追加", f, :steps,
-        class: "btn btn-secondary btn-block col-3 col-4 mt-2",
+        <%= link_to_add_association "＋追加".html_safe, f, :steps,
+        class: "btn btn-info btn-block col-2 mt-2",
         data: { association_insertion_method: 'append'}%>
       <%#----------調理手順formを以下に追加----------------%>
         <%= f.fields_for :steps do |t| %>

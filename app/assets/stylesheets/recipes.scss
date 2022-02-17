@@ -1,3 +1,21 @@
 // Place all the styles related to the recipes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+//レシピ投稿フォーム
+.step-no {
+  counter-reset: step;
+}
+
+.step-no .step-label::before {
+  counter-increment: step;
+  content: counter(step);
+  color: #C7B2D6;
+  font-weight: bold;
+  line-height: initial;
+}
+
+//色変えたい、統一したい
+.btn-info {
+  background-color: #C7B2D6;
+}

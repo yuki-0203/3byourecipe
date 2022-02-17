@@ -6,7 +6,10 @@
 <% else %>
 
 <%#----------TOP---------------------------------------------%>
-      <%#=注目レシピ%>
+  <%#----------注目レシピ-----------------------%>
+    <h4>注目レシピ</h4>
+      <%= render "recipes/recipe_cardgroup", recipes: @recipe_favorite_ranks %>
+  <%#----------ステップ数別レシピ一覧-----------------------%>
 <h4 class="m-3">レシピ一覧</h4>
        <ul class="nav nav-tabs justify-content-center text-center mt-5">
           <li class="nav-item">
@@ -26,7 +29,7 @@
   <%#----------タブ内容---------------------------------------------%>
 <div class="tab-content">
     <%#----------2step-----------------------%>
-          <div id="contents1" class="tab-pane active"> 
+          <div id="contents1" class="tab-pane active">
               <% if @recipe_step_2.exists? %>
                   <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_2 %>
                 <% else %>

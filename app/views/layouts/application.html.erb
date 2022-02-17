@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application','data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/c3fbb4b704.js" crossorigin="anonymous"></script>
     <%= favicon_link_tag 'favicon.ico' %>
     <!-- Bootstrap JavaScript読み込みコード-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -22,6 +23,8 @@
      </div>
       <%= yield %>
     </main>
+    <div class="footerFixed">　<%#CSSでフッター位置の調整%>
     <%= render "layouts/footer"%>
+  </div>
   </body>
 </html>
