@@ -12,10 +12,27 @@
   content: counter(step);
   color: #C7B2D6;
   font-weight: bold;
+}
+
+.material-no {
+  counter-reset: step;
+}
+
+.material-no .material-label::before {
+  counter-increment: step;
+  content: counter(step);
+  color: #C7B2D6;
+  font-weight: bold;
   line-height: initial;
 }
+
+
+
+
+
 
 //色変えたい、統一したい
 .btn-info {
   background-color: #C7B2D6;
 }
+

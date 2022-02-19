@@ -5,9 +5,6 @@ class UsersController < ApplicationController
      #ユーザーのお気に入りにしているレシピ全てを表示
     favorites = Favorite.where(user_id: @user.id).pluck(:recipe_id)
     @favorite_recipes = Recipe.find(favorites)
-    #レシピのお気に入り数をカウント
-    recipe = Recipe.find(params[:id])
-    @recipe_favorites_count = Favorite.where(recipe_id: recipe).count
     #ユーザーの投稿脱レポの全てを表示
     @impressions = Impression.where(user_id: @user.id)
   end

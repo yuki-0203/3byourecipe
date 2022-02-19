@@ -68,7 +68,7 @@ a, a:visited, a:focus, a:hover {
 .nav-link {
   color: white;
   background-color: #C7B2D6;
-  width: 300px;
+  width: 250px;
 }
 
 
@@ -105,4 +105,34 @@ footer{
     position: relative;/*←相対位置*/
     padding-bottom: 120px;/*←footerの高さ*/
     box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+
+.card {
+    transition:background-color 0.3s;
+}
+
+.card:hover {
+    background-color:#D6C7B2;
+
+}
+
+//見出し文字
+h4 {
+  position: relative;
+  text-shadow: 0 0 2px white;
+  display: inline;
+}
+h4:before {
+  content: "";
+  position: absolute;
+  background: #C7B2D6;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  top: 45%;
+  /* border: dashed 1px white; */
+  left: -15px;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index: -1;
 }

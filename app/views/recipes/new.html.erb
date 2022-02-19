@@ -1,83 +1,83 @@
 <div class="container">
-
-<h2>レシピ投稿</h2>
-
-
- <%= form_with model: @recipe , url: recipes_path ,local: true do |f| %>
-<%= f.hidden_field :user_id, value: current_user.id %>
-<div class="row">
-	<div class="col-md-10 col-sm-10">
-    <%= f.label :name, "レシピ名"%>
-    　<%= f.text_field :name,:size =>"100", class: "form-control"%>
-  </div>
-</div>
-
-<div class="row">
-	<div class="col-md-3 col-sm-3">
-  　<div class="recipe_image">
-  　     <%#=---プレビュー画像--%>
-          <%= attachment_image_tag @recipe, :image, fallback: "no-image-recipe.png", id: "img_prev", style: "height: 200px; width:200px;" %>
-          <br>
-          <%= f.attachment_field :image %>
-     </div>
-  </div>
-
-  <div class="col-md-9 col-sm-9 mt-2">
-      　<%= f.label :introduction, "料理紹介"%>
-      　<%= f.text_area :introduction, :size => "72", class: "form-control"%>
-        <%= f.label :tag_list, "タグ"%>
-        <%= f.text_field :tag_list, value: @recipe.tag_list.join(','), class: "form-control"%>
-
-    <%#----------材料の項目----------------%>
-    <div class ="materials mt-2">
-      <%= f.label :serving ,"材料・調味料（最大８種類まで）"%>
-       <%= f.text_field :serving ,:size =>"10" %>人分
-     <%#----------材料formの追加ボタン----------------%>
-          <%= link_to_add_association "＋追加",f,:materials,
-            class: "btn btn-info btn-block col-2 ",
-            data: { association_insertion_method: 'append' }%>
-        <%#----------fields_for----------------%>
-          <%= f.fields_for :materials , local: true do |t| %>
-  　   <%#----------材料formのテンプレート----------------%>
-          <%= render "recipes/material_fields", f: t %>
-      <% end %>
+    <div class="row">
+    	<div class="col-lg-10 mt-4">
+        <h4>レシピ投稿</h4>
+        </div>
     </div>
-  </div>
-</div>
 
-<div class="row">
-   <div class="col-md-10 col-sm-10 offset-1 mt-4">
-    <div id ="steps">
-    <%#----------調理手順の項目----------------%>
-    <h5>作り方（最大5ステップ）</h5>
-       <%#----------調理手順formの追加ボタン----------------%>
-      <div class="step-no">
-        <%= link_to_add_association "＋追加".html_safe, f, :steps,
-        class: "btn btn-info btn-block col-2 mt-2",
-        data: { association_insertion_method: 'append'}%>
-      <%#----------調理手順formを以下に追加----------------%>
-        <%= f.fields_for :steps do |t| %>
-     <%#----------調理手順formのテンプレート----------------%>
-        <% render 'step_fields', f: t %>
-      <% end %>
+    <div class="row">
+    	<div class="col-lg-12 mt-3 mb-1">
+          <%= form_with model: @recipe , url: recipes_path ,local: true do |f| %>
+              <%= f.hidden_field :user_id, value: current_user.id %>
+              <%= f.label :name, "レシピ名"%>
+              <%= f.text_field :name,:size =>"100", class: "form-control"%>
       </div>
     </div>
-  </div>
-</div>
-<div class="row">
-   <div class="col-md-10 col-sm-10 offset-1 mt-1">
-      <%= f.label :note, "備考"%>
-    　<%= f.text_area :note,:size =>"100",class: "form-control" %>
+    <div class="row">
+	    <div class="col-lg-3 mb-1">
+  	       <div class="recipe_image m-1">
+  	         <!---------プレビュー画像------------->
+                <%= attachment_image_tag @recipe, :image, fallback: "no-image-recipe.png", id: "img_prev", style: "height: 300px; width:350px;" %>
+                <%= f.attachment_field :image %>
+            </div>
+      </div>
+
+      <div class="col-lg-8 mb-1 offset-1">
+            　<%= f.label :introduction,"料理紹介"%>
+            　<%= f.text_area :introduction, :size => "100", class: "form-control"%>
+              <%= f.label :tag_list, "タグ" %>
+              <%= f.text_field :tag_list, value: @recipe.tag_list.join(','), class: "form-control"%>
+            <!----------材料の項目---------------->
+          <div class ="materials mt-2">
+                <%= f.label :serving ,"材料・調味料（最大８種類まで）"%>
+              <%= f.text_field :serving ,:size =>"10" %> 人分
+            <!----------材料formの追加ボタン---------------->
+            <div class="material-no">
+                <%= link_to_add_association "＋追加",f,:materials,class: "btn btn-info btn-block col-2 ml-4 mb-1",
+                    data: { association_insertion_method: 'append' }%>
+            <!----------fields_for----------------%>
+                <%= f.fields_for :materials , local: true do |t| %>
+            <!----------材料formのテンプレート---------------->
+                <%= render "recipes/material_fields", f: t %>
+              <% end %>
+            </div>
+        </div>
+      </div>
     </div>
-</div>
-<div class="row">
-   <div class="col-md-10 col-sm-10 offset-1 mt-3">
-       <%= f.submit '確認画面へ'%>
 
-  </div>
-</div>
+    <div class="row">
+       <div class="col-lg-12 mt-2">
+          <div id ="steps">
+            <!----------調理手順の項目---------------->
+            <label>作り方（最大5ステップ）</label>
+            <!----------調理手順formの追加ボタン---------------->
+              <div class="step-no">
+                  <%= link_to_add_association "＋追加".html_safe, f, :steps,class: "btn btn-info btn-block col-2 ml-4 mb-1",
+                    data: { association_insertion_method: 'append'}%>
+            <!----------調理手順formを以下に追加---------------->
+                   <%= f.fields_for :steps do |t| %>
+             <!----------調理手順formのテンプレート---------------->
+                    <%= render 'step_fields', f: t %>
+                <% end %>
+              </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="row">
+       <div class="col-lg-12 mt-3 mb-1">
+          <%= f.label :note, "コツ"%>
+          <%= f.text_area :note,:size =>"100",class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 mt-3 mb-1">
+       <%= f.submit 'レシピを投稿する',class: "btn btn-info btn-block col-2 ml-4 mb-1"%>
+      </div>
+    </div>
     <% end %>
-
+</div>
 <script>
 $(document).on("turbolinks:load", function(){
   function readURL(input) {

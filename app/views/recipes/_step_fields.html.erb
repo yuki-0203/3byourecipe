@@ -1,10 +1,9 @@
 
 <div class="nested-fields step-label">
-  <div class="row mx-auto">
-  　    <%#= f.attachment_field :image %>
-    <div class="field col-8 m-1"><%= f.text_field :explanation, class: "form-control", placeholder: "手順" %></div>
-    <div class="col-1 m-1">
-      <%= link_to_remove_association "#{icon 'fas', 'trash-alt'}".html_safe, f, id: 'remove-btn', class: "btn btn-outline-secondary btn-block" %>
-    </div>
+  <div class="row mt-1">
+      <div class="field col-10 mt-1"><%= f.text_field :explanation, class: "form-control", placeholder: "手順" %></div>
+      <div class="field col-2 mt-1">
+        <%= link_to_remove_association "#{icon 'fas', 'trash-alt'}".html_safe, f, id: 'remove-btn', class: "btn btn-outline-secondary btn-block" %>
+      </div>
   </div>
 </div>

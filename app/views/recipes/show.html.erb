@@ -1,14 +1,16 @@
 
 <div class="row">
 	<div class="col-md-10 col-sm-10">
-      <%#=レシピ名%>
+
     　<%= @recipe.name%>
   </div>
-  <%#=お気に入り登録%>
+  <!---お気に入り登録---->
   <span id="favorite_buttons_<%= @recipe.id %>">
     <%= render "favorites/favorite", recipe: @recipe %>
   </span>
 </div>
+
+
 <div class="row">
 	<div class="col-md-3 col-sm-3">
   　<div class="recipe_image">
@@ -16,16 +18,15 @@
      </div>
   </div>
   <div class="col-md-9 col-sm-9 mt-2">
-      　<%#=料理紹介%>
+      　<!---料理紹介--->
       　<%= @recipe.introduction%>
-      　<%#=タグ%>
+      　<!---タグ--->
       <% if @tags.present? %>
       <% @tags.each do |tag| %>
         <%= link_to "＃#{tag.name}", recipes_path(tag_name: tag.name) %>
       <% end %>
     <% end %>
 
-    <%#----------材料----------------%>
     <div class ="materials mt-2">
           <h5>材料・調味料</h5>
             <%= @recipe.serving %>人分
@@ -41,23 +42,24 @@
   </div>
  </div>
 
-<div class="row">
-   <div class="col-md-10 col-sm-10 offset-1 mt-4">
-    <div id ="steps">
-          <h5>作り方</h5>
-              <% @steps.each do |step|%>
-              <%= step.explanation %>
-  　         <% end %>
-  　 </div>
-    </div>
-  </div>
 
-<div class="row">
-   <div class="col-md-10 col-sm-10 offset-1 mt-1">
-      <h5>備考</h5>
-    　<%= @recipe.note %>
+    <div class="row">
+       <div class="col-md-10 col-sm-10 offset-1 mt-4">
+          <div id ="steps">
+            <h5>作り方</h5>
+                <% @steps.each do |step|%>
+                  <%= step.explanation %>
+                <% end %>
+      　   </div>
+      </div>
     </div>
-</div>
+
+    <div class="row">
+      <div class="col-md-10 col-sm-10 offset-1 mt-1">
+          <h5>備考</h5>
+        　  <%= @recipe.note %>
+      </div>
+    </div>
 
 <h6>脱レポ</h6>
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -66,7 +68,6 @@
   <% if @impressions.exists? %>
     <%= render "impressions/index" %>
       <%= link_to ">>脱レポ投稿一覧へ",recipe_impressions_path(@recipe.id) %>
-
   <% else %>
        脱レポの投稿はまだありません
   <% end %>
@@ -87,12 +88,11 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>
+        </div><!--/.modal-header -->
         <div class="modal-body">
            <%= form_with model: [@recipe,@impression] , url: recipe_impressions_path(@recipe.id) ,local: true do |f| %>
            <%= f.label :image, "作った料理画像 （任意）"%>
            <%= f.attachment_field :image %>
-            <br>
              <%= f.label :impression, "感想 (必須)"%>
               <%= f.text_area :impression,:size =>"300", class: "form-control"%>
           </div>
@@ -100,7 +100,7 @@
                     <%= f.submit '脱レポを送る'%>
                      <% end %>
                     <%= link_to "レシピに戻る", recipe_path(@recipe)%>
-        </div><!-- /.modal-footer -->
+                  </div><!-- /.modal-footer -->
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->

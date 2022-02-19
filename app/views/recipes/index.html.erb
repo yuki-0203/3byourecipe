@@ -1,72 +1,88 @@
 
-<%#----------タブリンクの結果--------------------------------%>
-<% if @tag_recipe.present? %>
-    <%= "#{@tag} に関連する投稿" %>
-       <%= render "recipes/recipe_cardgroup", recipes: @tag_recipe %>
-<% else %>
-
-<%#----------TOP---------------------------------------------%>
-  <%#----------注目レシピ-----------------------%>
-    <h4>注目レシピ</h4>
-      <%= render "recipes/recipe_cardgroup", recipes: @recipe_favorite_ranks %>
-  <%#----------ステップ数別レシピ一覧-----------------------%>
-<h4 class="m-3">レシピ一覧</h4>
-       <ul class="nav nav-tabs justify-content-center text-center mt-5">
-          <li class="nav-item">
-            <a href="#contents1" class="nav-link active mr-2" data-toggle="tab">２ステップ</a>
-          </li>
-          <li class="nav-item">
-            <a href="#contents2" class="nav-link mr-2" data-toggle="tab">３ステップ</a>
-          </li>
-          <li class="nav-item">
-            <a href="#contents3" class="nav-link mr-2" data-toggle="tab">４ステップ</a>
-          </li>
-          <li class="nav-item">
-            <a href="#contents4" class="nav-link mr-2" data-toggle="tab">５ステップ</a>
-          </li>
-        </ul>
-
-  <%#----------タブ内容---------------------------------------------%>
-<div class="tab-content">
-    <%#----------2step-----------------------%>
-          <div id="contents1" class="tab-pane active">
-              <% if @recipe_step_2.exists? %>
-                  <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_2 %>
-                <% else %>
-                  該当のレシピはありません
-                <% end %>
-                <%#=ページネーション%>
-                <div class="text-center mt-3"><%= paginate @recipe_step_2 %></div>
-          </div>
-     <%#----------3step-----------------------%>
-          <div id="contents2" class="tab-pane">
-              <% if @recipe_step_3.exists? %>
-                  <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_3 %>
-                <% else %>
-                  該当のレシピはありません
-                <% end %>
-                <%#=ページネーション%>
-                <div class="text-center mt-3"><%= paginate @recipe_step_3 %></div>
-          </div>
-    <%#----------4step-----------------------%>
-          <div id="contents3" class="tab-pane">
-              <% if @recipe_step_4.exists? %>
-                  <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_4 %>
-                <% else %>
-                  該当のレシピはありません
-                <% end %>
-                <%#=ページネーション%>
-                <div class="text-center mt-3"><%= paginate @recipe_step_4 %></div>
-          </div>
-  <%#----------5step-----------------------%>
-          <div id="contents4" class="tab-pane">
-              <% if @recipe_step_5.exists? %>
-                  <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_5 %>
-                <% else %>
-                  該当のレシピはありません
-                <% end %>
-                <%#=ページネーション%>
-                <div class="text-center mt-3"><%= paginate @recipe_step_5 %></div>
-          </div>
+<div class="container">
+  <!----------タブリンクの結果-------------------------------->
+  <% if @tag_recipe.present? %>
+      <div class="row">
+        <div class="col-lg-12 mt-4">
+            <h4><%= "#{@tag} に関連する投稿" %></h4>
+               <%= render "recipes/recipe_cardgroup", recipes: @tag_recipe %>
+        </div>
       </div>
-<% end %>
+  <% else %>
+
+  <!---------TOP--------------------------------------------->
+    <!----------注目レシピ一覧-------------------------->
+    <div class="row">
+      <div class="col-lg-12 mt-5">
+          <h4>注目レシピ</h4>
+          <small>　<i class="fa fa-heart" aria-hidden="true"></i> とくに人気のレシピはこちらです</small>
+            <%= render "recipes/recipe_cardgroup", recipes: @recipe_favorite_ranks %>
+      </div>
+    </div>
+    <!----------ステップ数別レシピ一覧-------------------------->
+    <div class="row">
+      <div class="col-lg-12 mt-5">
+          <h4>レシピ一覧</h4>
+          <small>　<i class="fa fa-certificate" aria-hidden="true"></i> 料理の手順数別にレシピを見ることができます</small>
+
+            <div class="recipe_tab mt-4">
+                <div class="tab-title">
+                   <ul class="nav nav-tabs justify-content-center text-center">
+                        <li class="nav-item">
+                          <a href="#contents1" class="nav-link active mr-2" data-toggle="tab">２ステップ</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#contents2" class="nav-link mr-2" data-toggle="tab">３ステップ</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#contents3" class="nav-link mr-2" data-toggle="tab">４ステップ</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#contents4" class="nav-link mr-2" data-toggle="tab">５ステップ</a>
+                        </li>
+                    </ul>
+                  </div>
+              <%#----------タブ内容---------------------------------------------%>
+                <div class="tab-content">
+                   <%#----------2step-----------------------%>
+                    <div id="contents1" class="tab-pane active">
+                        <% if @recipe_step_2.exists? %>
+                          <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_2 %>
+                        <% else %>
+                            <p class="text-center mt-5"><i class="fa fa-cutlery" aria-hidden="true"></i> 該当のレシピはありません</p>
+                        <% end %>
+                          <div class="text-center mt-3"><%= paginate @recipe_step_2 %></div>
+                    </div>
+                   <%#----------3step-----------------------%>
+                    <div id="contents2" class="tab-pane">
+                      <% if @recipe_step_3.exists? %>
+                            <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_3 %>
+                        <% else %>
+                            <p class="text-center mt-5"><i class="fa fa-cutlery" aria-hidden="true"></i> 該当のレシピはありません</p>
+                        <% end %>
+                          <div class="text-center mt-3"><%= paginate @recipe_step_3 %></div>
+                    </div>
+                    <%#----------4step-----------------------%>
+                    <div id="contents3" class="tab-pane">
+                        <% if @recipe_step_4.exists? %>
+                            <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_4 %>
+                          <% else %>
+                            <p class="text-center mt-5"><i class="fa fa-cutlery" aria-hidden="true"></i> 該当のレシピはありません</p>
+                          <% end %>
+                          <div class="text-center mt-3"><%= paginate @recipe_step_4 %></div>
+                    </div>
+                    <%#----------5step-----------------------%>
+                      <div id="contents4" class="tab-pane">
+                          <% if @recipe_step_5.exists? %>
+                              <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_5 %>
+                            <% else %>
+                              <p class="text-center mt-5"><i class="fa fa-cutlery" aria-hidden="true"></i> 該当のレシピはありません</p>
+                            <% end %>
+                            <div class="text-center mt-3"><%= paginate @recipe_step_5 %></div>
+                      </div>
+                </div>
+     　 </div>
+      </div>
+    </div>
+  <% end %>
+</div>
