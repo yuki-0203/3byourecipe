@@ -3,5 +3,5 @@ class Step < ApplicationRecord
   counter_culture :recipe
    attachment :image
 
-  validates :explanation, presence: true
+  validates :explanation, presence: true, length: {in: 1..50}
 end

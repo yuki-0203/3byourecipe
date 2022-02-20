@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  before_action :authenticate_user!, except: [:index,:show]
 
 
   def new
@@ -9,7 +10,7 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new (recipe_params)
-    if @recipe.save
+    if @recipe.save!
         redirect_to recipe_path(@recipe)
     else
       render 'new'

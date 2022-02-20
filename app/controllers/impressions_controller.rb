@@ -1,4 +1,5 @@
 class ImpressionsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :destroy]
 
   def create
     @impression = current_user.impressions.new(impression_params)

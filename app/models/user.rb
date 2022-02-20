@@ -13,7 +13,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :phone_number, presence: true
   validates :email, presence: true
-  validates :password_confirmation, presence: true, on: :create
+  validates :password_confirmation, confirmation: true, on: :create
   validates :password, presence: true, unless: :id?, on: :create
+  validates :introduction ,length: {maximum:50}
 
 end

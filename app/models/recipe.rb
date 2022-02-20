@@ -8,9 +8,9 @@ class Recipe < ApplicationRecord
   has_many :impression, dependent: :destroy
 
 
-  validates :name, presence: true
-  validates :introduction, presence: true
-  validates :serving, presence: true
+  validates :name, presence: true, length: {in: 1..20}
+  validates :introduction, presence: true, length: {in: 1..50}
+  validates :serving, presence: true, numericality: {less_than_or_equal_to: 5}
   validates :image, presence: true
 
   attachment :image

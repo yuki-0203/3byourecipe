@@ -397,6 +397,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   puma (~> 3.11)
+  rack-test
   rails (~> 5.2.5)
   ransack
   refile!

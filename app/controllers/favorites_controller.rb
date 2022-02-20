@@ -1,4 +1,6 @@
 class FavoritesController < ApplicationController
+   before_action :authenticate_user!, only: [:create, :destroy]
+
   def create
     @recipe = Recipe.find(params[:recipe_id])
     @recipe_favorite = Favorite.new(user_id: current_user.id, recipe_id: params[:recipe_id])
