@@ -19,12 +19,12 @@ class RecipesController < ApplicationController
 
   def index
     #お気に入り登録数を多い順に最大5件表示
-    @recipe_favorite_ranks = Recipe.find(Favorite.group(:recipe_id).order('count(recipe_id) desc').limit(5).pluck(:recipe_id))
+    @recipe_favorite_ranks = Recipe.includes([:user]).find(Favorite.group(:recipe_id).order('count(recipe_id) desc').limit(5).pluck(:recipe_id))
     #step数別、新着順にレシピ表示
-    @recipe_step_2 = Recipe.where(steps_count: "2").order(created_at: :desc).page(params[:page]).per(20)
-    @recipe_step_3 = Recipe.where(steps_count: "3").order(created_at: :desc).page(params[:page]).per(20)
-    @recipe_step_4 = Recipe.where(steps_count: "4").order(created_at: :desc).page(params[:page]).per(20)
-    @recipe_step_5 = Recipe.where(steps_count: "5").order(created_at: :desc).page(params[:page]).per(20)
+    @recipe_step_2 = Recipe.includes([:user]).where(steps_count: "2").order(created_at: :desc).page(params[:page]).per(20)
+    @recipe_step_3 = Recipe.includes([:user]).where(steps_count: "3").order(created_at: :desc).page(params[:page]).per(20)
+    @recipe_step_4 = Recipe.includes([:user]).where(steps_count: "4").order(created_at: :desc).page(params[:page]).per(20)
+    @recipe_step_5 = Recipe.includes([:user]).where(steps_count: "5").order(created_at: :desc).page(params[:page]).per(20)
     if @tag = params[:tag_name]  # タグ検索用
       @tag_recipe = Recipe.tagged_with(params[:tag_name])   # タグに紐付く投稿
     end
@@ -36,7 +36,7 @@ class RecipesController < ApplicationController
    @materials = @recipe.materials
    @steps = @recipe.steps
    @impression = @recipe.impression.new
-   @impressions = Impression.where(recipe_id: @recipe.id)
+   @impressions = Impression.preload(:user)
   end
 
    def edit

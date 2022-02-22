@@ -4,10 +4,12 @@
 
     　<%= @recipe.name%>
   </div>
+<% if user_signed_in? %>
   <!---お気に入り登録---->
   <span id="favorite_buttons_<%= @recipe.id %>">
     <%= render "favorites/favorite", recipe: @recipe %>
   </span>
+<% end %>
 </div>
 
 
@@ -62,9 +64,11 @@
     </div>
 
 <h6>脱レポ</h6>
+<% if user_signed_in? %>
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     脱レポを投稿する
   </button>
+<% end %>
   <% if @impressions.exists? %>
     <%= render "impressions/index" %>
       <%= link_to ">>脱レポ投稿一覧へ",recipe_impressions_path(@recipe.id) %>

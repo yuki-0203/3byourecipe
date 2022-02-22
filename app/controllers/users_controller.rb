@@ -3,12 +3,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @recipes = Recipe.where(user_id: @user.id)
+    @recipes = Recipe.eager_load(:user)
      #ユーザーのお気に入りにしているレシピ全てを表示
-    favorites = Favorite.where(user_id: @user.id).pluck(:recipe_id)
+    favorites = Favorite.eager_load(:user).pluck(:recipe_id)
     @favorite_recipes = Recipe.find(favorites)
     #ユーザーの投稿脱レポの全てを表示
-    @impressions = Impression.where(user_id: @user.id)
+    @impressions = Impression.includes([:recipe]).eager_load(:user)
   end
 
   def profile
