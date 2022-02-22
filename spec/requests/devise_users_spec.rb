@@ -1,46 +1,31 @@
 require 'rails_helper'
- describe User do
-   describe '#create' do
-    #正常系
-     it "last_name,first_name,phone_number,is_gender,email,passwordが存在すれば登録できること" do
-       user = build(:user)
-       expect(user).to be_valid
-      end
+ RSpec.describe User, type: :request do
+   let(:user) { create(:user) }
+   let(:user_params) { attributes_for(:user) }
+   let(:invalid_user_params) { attributes_for(:user, first_name: "") }
 
-    #異常系
-      it "last_nameがない場合は登録できないこと" do
-       user = build(:user,last_name:nil)
-       user.valid?
-       expect(user.errors[:last_name]).to include("を入力してください")
-      end
+  describe "サインインのテスト" do
+    context "パラメータが妥当な場合" do
+     it "createが成功すること" do
+      expect do
+       post user_registration_path, params: { user: user_params }
+      end.to change(User, :count).by 1
+     end
 
-      it "first_nameがない場合は登録できないこと" do
-        user = build(:user,first_name:nil)
-        user.valid?
-        expect(user.errors[:first_name]).to include("を入力してください")
+     it "サインイン後のリダイレクト先がトップ画面である" do
+      post user_registration_path, params: { user: user_params }
+       expect(response).to redirect_to root_path
       end
+    end
 
-       it "phone_numberがない場合は登録できないこと" do
-        user = build(:user,phone_number:nil)
-        user.valid?
-        expect(user.errors[:phone_number]).to include("を入力してください")
-      end
-
-       it "emailがない場合は登録できないこと" do
-        user = build(:user,email:nil)
-        user.valid?
-        expect(user.errors[:email]).to include("を入力してください")
-      end
-
-       it "passwordがない場合は登録できないこと" do
-        user = build(:user,password:nil)
-        user.valid?
-        expect(user.errors[:password]).to include("を入力してください")
-      end
-
-       it "プロフィール文が51文字以上の場合は登録できないこと" do
-        user = build(:user,introduction: "あ" * 51)
-        expect(user).to be_invalid
-       end
+    context "パラメータが不正な場合" do
+     it 'createが失敗すること' do
+         expect do
+          post user_registration_path, params: { user: invalid_user_params }
+         end.to_not change(User, :count)
+     end
+    end
   end
 end
+
+
