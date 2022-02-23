@@ -1,5 +1,5 @@
 class ImpressionsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, only: %i[create destroy]
 
   def create
     @impression = current_user.impressions.new(impression_params)
@@ -19,13 +19,13 @@ class ImpressionsController < ApplicationController
 
   def destroy
     recipe = Recipe.find(params[:recipe_id])
-      Impression.find(params[:id]).destroy
-      redirect_to recipe_path(recipe)
+    Impression.find(params[:id]).destroy
+    redirect_to recipe_path(recipe)
   end
 
+  private
 
-    private
-    def impression_params
-      params.require(:impression).permit(:recipe_id,:user_id,:impression,:image,:reply_comment)
-    end
+  def impression_params
+    params.require(:impression).permit(:recipe_id, :user_id, :impression, :image, :reply_comment)
+  end
 end

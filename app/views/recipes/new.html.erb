@@ -24,13 +24,15 @@
               <%= f.label :tag_list, "タグ" %>
               <%= f.text_field :tag_list, value: @recipe.tag_list.join(','), class: "form-control"%>
             <!----------材料の項目---------------->
-          <div class ="materials mt-2">
+          <div id="materials">
                 <%= f.label :serving ,"材料・調味料（最大８種類まで）"%>
               <%= f.text_field :serving ,:size =>"10" %> 人分
             <!----------材料formの追加ボタン---------------->
             <div class="material-no">
+              <div id="add-material">
                 <%= link_to_add_association "＋追加",f,:materials,class: "btn btn-info btn-block col-2 ml-4 mb-1",
                     data: { association_insertion_method: 'append' }%>
+              </div>
             <!----------fields_for----------------%>
                 <%= f.fields_for :materials , local: true do |t| %>
             <!----------材料formのテンプレート---------------->

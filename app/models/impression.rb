@@ -4,7 +4,7 @@ class Impression < ApplicationRecord
 
   attachment :image
 
-  validates :impression, presence: true, length: {maximum:50}
+  validates :impression, presence: true, length: { maximum: 50 }
   validates :recipe_id, presence: true
   validates :user_id, presence: true
 end

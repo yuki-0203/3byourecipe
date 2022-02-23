@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
-   before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show]
 
   def show
     @user = User.find(params[:id])
     @recipes = Recipe.eager_load(:user)
-     #ユーザーのお気に入りにしているレシピ全てを表示
+    # ユーザーのお気に入りにしているレシピ全てを表示
     favorites = Favorite.eager_load(:user).pluck(:recipe_id)
     @favorite_recipes = Recipe.find(favorites)
-    #ユーザーの投稿脱レポの全てを表示
+    # ユーザーの投稿脱レポの全てを表示
     @impressions = Impression.includes([:recipe]).eager_load(:user)
   end
 
@@ -31,6 +31,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :last_name, :first_name, :phone_number, :is_gender, :nickname, :introduction, :image, :password)
+    params.require(:user).permit(:email, :last_name, :first_name, :phone_number, :is_gender, :nickname, :introduction,
+                                 :image, :password)
   end
 end

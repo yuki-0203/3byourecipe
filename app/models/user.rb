@@ -15,6 +15,5 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :password_confirmation, confirmation: true, on: :create
   validates :password, presence: true, unless: :id?, on: :create
-  validates :introduction ,length: {maximum:50}
-
+  validates :introduction, length: { maximum: 50 }
 end

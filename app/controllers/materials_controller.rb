@@ -1,5 +1,5 @@
 class MaterialsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :authenticate_user!, only: %i[create update destroy]
   def create; end
 
   def update; end
