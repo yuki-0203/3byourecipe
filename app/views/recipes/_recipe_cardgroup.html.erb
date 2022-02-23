@@ -1,16 +1,22 @@
-   <div class="card-group mt-4 mb-4">
+<div class="card-group mt-4 mb-4">
   <% recipes.each do |recipe| %>
    <div class="col-3">
-    <div class="card shadow-sm">
-    <%= link_to recipe_path(recipe) do %>
-      <%= attachment_image_tag recipe, :image, fallback: "no-image-recipe.png", class: 'card-img-top' %>
-   <% end %>
-       <h5 class="card-title text-center  font-weight-bold font-large mt-1"><%= link_to  recipe.name,recipe_path(recipe) %></h5>
-       <p class="card-text text-center">お気に入り登録 🤍<%= recipe.favorites.count %></p>
-       <p class="card-text text-center mb-2"><small>by <%= link_to  recipe.user.nickname,user_path(recipe.user) %></small>
-        <%= attachment_image_tag recipe.user, :image, :fill, 30, 30, fallback: "no-image-icon.png" %></p>
+     <div class="card shadow-sm">
+      <a href="/recipes/<%= recipe.id %>">
+       <%= attachment_image_tag recipe, :image, fallback: "no-image-recipe.png", class: 'card-img-top' %>
+        <h5 class="card-title text-center  font-weight-bold mt-3"><%= recipe.name%></h5>
+          <!---15文字以上は「…」になる（参考記事：https://qiita.com/ishidamakot/items/2e74d980b3a338e4c784)---->
+           <p class="card-text text-center mt-3 mb-2"><%= truncate(recipe.introduction, length: 15 ,omission: '…') %></span><br>
+           <small>お気に入り登録 <span style="color:#f08080">♥<%= recipe.favorites.count %></span></small>
+           </p>
+         <p class="card-footer text-center profile_image border-0 bg-transparent mb-2"><small>by <%=recipe.user.nickname%></small>
+           <%= attachment_image_tag recipe.user, :image, :fill, 30, 30, fallback: "no-image-icon.png"%>
+           <br>
+           <small><span style="color:gray">最終更新日: <%= l recipe.updated_at %></span></small>
+         </p>
+      </div>
     </div>
-   </div>
-  <% end %>
- </div>
+   <% end %>
+  </a>
+</div>
 

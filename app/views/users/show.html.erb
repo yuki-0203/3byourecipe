@@ -1,15 +1,15 @@
-<div class="container container-fluid">
+<div class="container-fluid m-3">
   <div class="row">
     <div class="col-12 mt-5">
           <h4>Mypage</h4>
     </div>
   </div>
   <div class="row">
-      <div class="col-lg-2 mt-5">
+    <div class="col-lg-3 mt-5">
         <div class="card-img-top">
-          <%= attachment_image_tag(@user, :image, :fill, 150, 150, fallback: "no-image-icon.png") %>
+          <%= attachment_image_tag(@user, :image, :fill, 200, 200, fallback: "no-image-icon.png",class: "img-fluid") %>
         </div>
-        <div class="card-body">
+        <div class="card-body center">
           <div class="card-title text-center">
             <%= @user.nickname %>
           </div>
@@ -26,11 +26,11 @@
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         </div>
       </div>
-      </div>
+    </div>
 
 
 
-    <div class="col-lg-9 offset-1">
+    <div class="col-lg-8 mr-2">
        <ul class="nav nav-tabs justify-content-center text-center mt-5">
     <li class="nav-item">
       <a href="#contents1"  class="nav-link active mr-2" data-toggle="tab">投稿したレシピ</a>

@@ -8,7 +8,6 @@
         </div>
       </div>
   <% else %>
-
   <!---------TOP--------------------------------------------->
     <!----------注目レシピ一覧-------------------------->
     <div class="row">
@@ -20,23 +19,23 @@
     </div>
     <!----------ステップ数別レシピ一覧-------------------------->
     <div class="row">
-      <div class="col-lg-12 mt-5">
+        <div class="col-lg-12 mt-5">
           <h4>レシピ一覧</h4>
           <small>　<i class="fa fa-certificate" aria-hidden="true"></i> 料理の手順数別にレシピを見ることができます</small>
 
             <div class="recipe_tab mt-4">
                 <div class="tab-title">
                    <ul class="nav nav-tabs justify-content-center text-center">
-                        <li class="nav-item">
+                        <li class="nav-item shadow-m">
                           <a href="#contents1" class="nav-link active mr-2" data-toggle="tab">２ステップ</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item shadow-m">
                           <a href="#contents2" class="nav-link mr-2" data-toggle="tab">３ステップ</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item shadow-m">
                           <a href="#contents3" class="nav-link mr-2" data-toggle="tab">４ステップ</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item shadow-m">
                           <a href="#contents4" class="nav-link mr-2" data-toggle="tab">５ステップ</a>
                         </li>
                     </ul>
@@ -45,43 +44,23 @@
                 <div class="tab-content">
                    <%#----------2step-----------------------%>
                     <div id="contents1" class="tab-pane active">
-                        <% if @recipe_step_2.exists? %>
-                          <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_2 %>
-                        <% else %>
-                            <p class="text-center mt-5"><i class="fa fa-cutlery" aria-hidden="true"></i> 該当のレシピはありません</p>
-                        <% end %>
-                          <div class="text-center mt-3"><%= paginate @recipe_step_2 %></div>
+                        <%= render "recipes/tab_content", recipe_step: @recipe_step_2 %>
                     </div>
                    <%#----------3step-----------------------%>
                     <div id="contents2" class="tab-pane">
-                      <% if @recipe_step_3.exists? %>
-                            <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_3 %>
-                        <% else %>
-                            <p class="text-center mt-5"><i class="fa fa-cutlery" aria-hidden="true"></i> 該当のレシピはありません</p>
-                        <% end %>
-                          <div class="text-center mt-3"><%= paginate @recipe_step_3 %></div>
+                        <%= render "recipes/tab_content", recipe_step: @recipe_step_3 %>
                     </div>
-                    <%#----------4step-----------------------%>
+                   <%#----------4step-----------------------%>
                     <div id="contents3" class="tab-pane">
-                        <% if @recipe_step_4.exists? %>
-                            <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_4 %>
-                          <% else %>
-                            <p class="text-center mt-5"><i class="fa fa-cutlery" aria-hidden="true"></i> 該当のレシピはありません</p>
-                          <% end %>
-                          <div class="text-center mt-3"><%= paginate @recipe_step_4 %></div>
+                        <%= render "recipes/tab_content", recipe_step: @recipe_step_4 %>
                     </div>
-                    <%#----------5step-----------------------%>
-                      <div id="contents4" class="tab-pane">
-                          <% if @recipe_step_5.exists? %>
-                              <%= render "recipes/recipe_cardgroup", recipes: @recipe_step_5 %>
-                            <% else %>
-                              <p class="text-center mt-5"><i class="fa fa-cutlery" aria-hidden="true"></i> 該当のレシピはありません</p>
-                            <% end %>
-                            <div class="text-center mt-3"><%= paginate @recipe_step_5 %></div>
-                      </div>
+                  <%#----------5step-----------------------%>
+                    <div id="contents4" class="tab-pane">
+                        <%= render "recipes/tab_content", recipe_step: @recipe_step_5 %>
+                    </div>
                 </div>
-     　 </div>
-      </div>
+     　       </div>
+        </div>
     </div>
   <% end %>
 </div>

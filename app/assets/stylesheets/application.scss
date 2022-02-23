@@ -30,16 +30,21 @@ a, a:visited, a:focus, a:hover {
     font-size :16px;
 }
 
-.nav-item-link{
+.hed{
+  font-size: 12px;
+  background-color: #C7B2D6;
+}
+
+.nav-item{
   display: inline-block;
   position: relative;
   cursor: pointer;
 
 }
-.nav-item-link::after{
+.nav-item::after{
   content:'';
-  position:absolute
-  ;width:100%;
+  position:absolute;
+  width:100%;
   transform:scaleX(0);
   height:2px;
   bottom:0;
@@ -48,19 +53,50 @@ a, a:visited, a:focus, a:hover {
   transform-origin:bottom right;
   transition:transform .4s cubic-bezier(.86,0,.07,1)
 }
-.nav-item-link:hover::after{
+.nav-item:hover::after{
   transform:scaleX(1);
   transform-origin:bottom left
 }
 
+//検索窓
+.nav-item-search{
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid #999;
+  display: block;
+  border-radius: 20px;
+  height: 2.5em;
+  width: 20em;
+  overflow: hidden;
+  font-size: 14px;
+
+}
+.search_input{
+  border: none;
+  height: 2.0em;
+}
+.search_input:focus {
+  outline: 0;
+}
+.search_submit{
+  cursor: pointer;
+  border: none;
+  background: #C7B2D6;
+  position: absolute;
+  width: 3.5em;
+  height: 3.0em;
+  right:0px;
+  top: -3px;
+  outline : none;
+}
 
 
 // プロフィール画像を丸く加工
 .profile_image {
   img{
   border-radius: 50% !important; /* 角丸半径を50%にする(=円形にする) */
-  width: 100px !important;  /* 縦横を同じ値にする */
-  height: 100px !important; /* 縦横を同じ値にする */
+  -centerwidth: 100px ;  /* 縦横を同じ値にする */
+  //height: 100px ; /* 縦横を同じ値にする */
   object-fit: cover !important; /* 縦横比固定したまま上2つの縦横の範囲内に収まるように配置する */
  }
 }
@@ -107,13 +143,32 @@ footer{
     box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
 }
 
+
 .card {
     transition:background-color 0.3s;
+    height: 390px;
 }
 
 .card:hover {
     background-color:#D6C7B2;
 
+}
+
+.card-img-top {
+    max-width: 100%;
+    flex-shrink:0;
+    height: 200px;
+ }
+
+.card-title{
+  font-size : 18px;
+  font-weight: bold;
+}
+
+
+.card-text{
+  font-size : 15px;
+  font-weight: lighter;
 }
 
 //見出し文字
@@ -136,3 +191,4 @@ h4:before {
   transform: translateY(-50%);
   z-index: -1;
 }
+

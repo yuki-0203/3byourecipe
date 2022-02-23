@@ -1,0 +1,6 @@
+<% if recipe_step.exists? %>
+     <%= render "recipes/recipe_cardgroup", recipes: recipe_step %>
+  <% else %>
+     <p class="text-center mt-5"><i class="fa fa-cutlery" aria-hidden="true"></i> 該当のレシピはありません</p>
+<% end %>
+<div class="text-center mt-3"><%= paginate recipe_step %></div>
