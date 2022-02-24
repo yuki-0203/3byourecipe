@@ -41,7 +41,6 @@ gem 'cocoon'
 gem 'counter_culture'
 gem 'devise'
 gem 'devise-i18n' # devise日本語化
-gem 'dotenv-rails'
 gem 'enum_help'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
