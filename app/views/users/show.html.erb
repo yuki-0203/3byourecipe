@@ -5,112 +5,67 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-3 mt-5">
-        <div class="card-img-top">
+    <div class="col-lg-3 mt-5 mx-auto text-center">
           <%= attachment_image_tag(@user, :image, :fill, 200, 200, fallback: "no-image-icon.png",class: "img-fluid") %>
-        </div>
-        <div class="card-body center">
-          <div class="card-title text-center">
+          <div class="user_nickname mt-3 mb-3 font-weight-bold font-lg">
             <%= @user.nickname %>
           </div>
-          <div class="card-text  text-center mb-2">
+          <div class="user_introduction mb-4">
             <%= @user.introduction %>
           </div>
-          <div class="btn btn-info mb-2">
-            <%=link_to "プロフィール編集", profile_users_path(@user)%>
+          <% if @user == current_user %>
+            <div class="btn-group-vertical">
+                <div class="btn btn-info mb-2">
+                  <%=link_to "プロフィール編集", profile_users_path(@user)%>
+                </div>
+                <div class="btn btn-info mb-2">
+                  <%=link_to "個人情報を修正", edit_user_path(@user)%>
+                </div>
+                <div class="btn btn-info mb-2">
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                </div>
+           </div>
+           <% end %>
+      </div>
+
+
+
+    <div class="col-lg-9 mr-2 mx-auto" >
+      <ul class="nav nav-tabs justify-content-center text-center mt-5">
+        <li class="nav-item">
+          <a href="#contents1"  class="nav-link active mr-2" data-toggle="tab">投稿したレシピ</a>
+        </li>
+        <li class="nav-item">
+          <a href="#contents2"  class="nav-link mr-2" data-toggle="tab">お気に入りレシピ</a>
+        </li>
+        <li class="nav-item">
+          <a href="#contents3"  class="nav-link mr-2" data-toggle="tab">投稿した脱レポ</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div id="contents1" class="tab-pane active">
+            <% if @recipes.present? %>
+                  <%= render "recipes/recipe_cardgroup", recipes: @recipes %>
+              <% else %>
+                投稿したレシピはありません
+              <% end %>
           </div>
-          <div class="btn btn-info mb-2">
-            <%=link_to "個人情報を修正", edit_user_path(@user)%>
-          </div>
-          <div class="btn btn-info mb-2">
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <div id="contents2" class="tab-pane">
+            <% if @favorite_recipes.present? %>
+                <%= render "recipes/recipe_cardgroup", recipes: @favorite_recipes %>
+              <% else %>
+                お気に入り登録をしたレシピはありません
+              <% end %>
         </div>
-      </div>
-    </div>
+        <div id="contents3" class="tab-pane">
+            <% if @impressions.present? %>
+                <%= render "impressions/index" %>
+              <% else %>
+                投稿した脱レポはありません
+              <% end %>
+        </div>
 
-
-
-    <div class="col-lg-8 mr-2">
-       <ul class="nav nav-tabs justify-content-center text-center mt-5">
-    <li class="nav-item">
-      <a href="#contents1"  class="nav-link active mr-2" data-toggle="tab">投稿したレシピ</a>
-    </li>
-    <li class="nav-item">
-      <a href="#contents2"  class="nav-link mr-2" data-toggle="tab">お気に入りレシピ</a>
-    </li>
-    <li class="nav-item">
-      <a href="#contents3"  class="nav-link mr-2" data-toggle="tab">投稿した脱レポ</a>
-    </li>
-  </ul>
-<div class="tab-content">
-    <div id="contents1" class="tab-pane active">
-        <% if @recipes.present? %>
-          <div class="row">
-            <div class="card-group">
-              <p>全<%= @recipes.count%>件</p>
-                  <% @recipes.each do |recipe| %>
-                  <div class="col-3">
-                    <div class="card">
-                         <%= link_to recipe_path(recipe) do %>
-                         <%= attachment_image_tag recipe, :image, fallback: "no-image-recipe.png", class: 'card-img-top' %>
-                        <% end %>
-                        <h5 class="card-title text-center  font-weight-bold"><%= link_to  recipe.name,recipe_path(recipe) %></h5>
-                        <p class="card-text ">お気に入り登録  🤍<%= recipe.favorites.count %></p>
-                  </div>
-                </div>
-                  <% end %>
-            </div>
-          <% else %>
-            投稿したレシピはありません
-          <% end %>
-      </div>
-    </div>
-    <div id="contents2" class="tab-pane">
-        <% if @favorite_recipes.present? %>
-          <div class="row">
-            <div class="card-group">
-              <p>全<%= @favorite_recipes.count%>件</p>
-                  <% @favorite_recipes.each do |favorite_recipe| %>
-                  <div class="col-3">
-                    <div class="card">
-                         <%= link_to recipe_path(favorite_recipe) do %>
-                         <%= attachment_image_tag favorite_recipe, :image, fallback: "no-image-recipe.png", class: 'card-img-top' %>
-                        <% end %>
-                        <h5 class="card-title text-center  font-weight-bold"><%= link_to  favorite_recipe.name,recipe_path(favorite_recipe) %></h5>
-                        <p class="card-text ">お気に入り登録  🤍<%= favorite_recipe.favorites.count %></p>
-                        <p class="card-text text-center">by <small><%= link_to  favorite_recipe.user.nickname,user_path(favorite_recipe.user) %></small>
-                      <%= attachment_image_tag favorite_recipe.user, :image, :fill, 30, 30, fallback: "no-image-icon.png" %></p>
-                  </div>
-                </div>
-                  <% end %>
-            </div>
-          <% else %>
-            お気に入り登録をしたレシピはありません
-          <% end %>
-      </div>
-    </div>
-    <div id="contents3" class="tab-pane">
-        <% if @impressions.present? %>
-         <div class="row">
-           <div class="card-group">
-             <% @impressions.each do |impression| %>
-                  <div class="col-3">
-                     <div class="card">
-                  <%= attachment_image_tag impression, :image, fallback: "no-image-recipe.png", class: 'card-img-top' %>
-                  <p class="card-text "><%=impression.impression %></p>
-                  <p class="card-text ">脱レポを投稿したレシピ<br><%= link_to impression.recipe.name,recipe_path(impression.recipe) %></p>
-                     </div>
-                </div>
-                <% end %>
-                </div>
-                </div>
-          <% else %>
-            投稿した脱レポはありません
-          <% end %>
-      </div>
-    </div>
-
-    </div>
+        </div>
 
 
 
@@ -119,7 +74,7 @@
   </div>
 </div>
 
-
+  </div>
 
 
 <%#------タブ表示----------%>

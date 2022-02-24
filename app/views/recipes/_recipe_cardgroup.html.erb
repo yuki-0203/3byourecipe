@@ -6,7 +6,7 @@
        <%= attachment_image_tag recipe, :image, fallback: "no-image-recipe.png", class: 'card-img-top' %>
         <h5 class="card-title text-center  font-weight-bold mt-3"><%= recipe.name%></h5>
           <!---15文字以上は「…」になる（参考記事：https://qiita.com/ishidamakot/items/2e74d980b3a338e4c784)---->
-           <p class="card-text text-center mt-3 mb-2"><%= truncate(recipe.introduction, length: 15 ,omission: '…') %></span><br>
+           <p class="card-text text-center mt-2 mb-1"><%= truncate(recipe.introduction, length: 15 ,omission: '…') %></span><br>
            <small>お気に入り登録 <span style="color:#f08080">♥<%= recipe.favorites.count %></span></small>
            </p>
          <p class="card-footer text-center profile_image border-0 bg-transparent mb-2"><small>by <%=recipe.user.nickname%></small>
