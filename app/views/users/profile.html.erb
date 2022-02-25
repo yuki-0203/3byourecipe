@@ -1,23 +1,39 @@
-<h2>プロフィール編集</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 mt-5">
+      <h4>プロフィール編集</h4>
+    </div>
+  </div>
 
-
-<%= form_with(model: @user,local: true) do |f| %>
-<%= f.attachment_field :image  %>
-<%= f.text_field :nickname , class: 'form-control'%>
-<%= f.text_area :introduction , class: 'form-control'%>
-<%= f.submit 'プロフィールを更新する'%>
-<% end %>
-
-<%#画像プレビュー%>
-<div class ="profile_image">
-  <img id="preview" style="width: 200px;height: 200px;">
-  <script>
-    $('#user_image').on('change', function (e) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $("#preview").attr('src', e.target.result);
-      }
-      reader.readAsDataURL(e.target.files[0]);
-      });
-  </script>
+  <div class="form-group row mt-4">
+    <%= form_with(model: @user,local: true) do |f| %>
+      <div class="item-image col-sm-10">
+        <%= attachment_image_tag @user, :image, class: "img-square img-thumbnail m-1", fallback: "no-image-icon.png", size: "200x150" %>
+        <%= f.attachment_field :image, id: "image"  %>
+      </div>
+        <%= f.text_field :nickname, class: "form-control col-sm-10 mt-3",placeholder: "ニックネーム" %>
+        <%= f.text_area :introduction, class: "form-control col-sm-10 mt-3",placeholder: "自己紹介（50文字以内）" %>
+      <div class="col-sm-8 mt-4">
+          <%= f.submit "プロフィールを更新する" ,class: "btn btn-info"%>
+          <%= link_to "キャンセル", user_path(@user) ,class: "btn btn-light ml-3"%>
+      </div>
+    <% end %>
+  </div>
 </div>
+
+<!----画像プレビュー機能--->
+  <script>
+  $(function() {
+      $('#image').on('change', function() {
+          var selectedFile = this.files[0];
+          var fileReader = new FileReader();
+
+          fileReader.onload = function(event) {
+              var loadedImageUri = event.target.result;
+               $('.img-square').attr('src', loadedImageUri);
+          };
+
+          fileReader.readAsDataURL(selectedFile);
+      });
+  });
+  </script>

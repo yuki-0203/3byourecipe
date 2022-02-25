@@ -1,87 +1,124 @@
 
-<div class="row">
-	<div class="col-md-10 col-sm-10">
+<div class="container">
+    <div class="row">
+      <div class="col-sm-10 mt-4">
+        <% if @recipe.user = current_user %>
+          <%= link_to "レシピを編集する", edit_recipe_path(@recipe),class: "btn btn-info ml-3" %>
+          <%= link_to "レシピを削除する", recipe_path(@recipe),data: {confirm: '本当に削除しますか？'}, method: :delete,class: "btn btn-danger ml-3" %>
+        <% end %>
+      </div>
+    </div>
 
-    　<%= @recipe.name%>
+    <div class="row">
+      <div class="col-sm-6 mt-4">
+        <h3><%= @recipe.name%></h3>
+      </div>
+      <div class="col-sm-3 mt-4 ">
+          <% if user_signed_in? %>
+            <% if current_user != @recipe.user %>
+              <span id="favorite_buttons_<%= @recipe.id %>">
+                <%= render "favorites/favorite", recipe: @recipe %>
+              </span>
+            <% else%>
+              <span style="color:#DBB6C6; font-size:23px;">♥</span>
+              <span style="font-size:23px;"><%= @recipe.favorites.count %></span>
+            <% end %>
+          <% else %>
+              <span style="color:#DBB6C6; font-size:23px;">♥</span>
+              <span style="font-size:23px;"><%= @recipe.favorites.count %></span>
+          <% end %>
+      </div>
+      <div class="col-sm-3 mt-4">
+        <p><small><span style="color:gray">最終更新日: <%= l @recipe.updated_at %></span></small><p>
+      </div>
+    </div>
+
+    <div class="row">
+    	<div class="col-sm-3">
+      　<div class="recipe_image">
+              <%= attachment_image_tag @recipe, :image, fallback: "no-image-recipe.png", style: "height: 230px; width:260px;",class:"img-fluid" %>
+        </div>
+      </div>
+
+      <div class="col-sm-9 mt-3">
+          <div class="recipe-user">
+              <%= attachment_image_tag @recipe.user, :image, :fill, 30, 30, fallback: "no-image-icon.png"%>
+               <small><%=link_to  @recipe.user.nickname,user_path(@recipe.user)%></small>
+          </div>
+          <div class="introduction mt-2">
+            <%= @recipe.introduction %>
+          </div>
+          <div class="tag mt-2 ml-3">
+              <% if @tags.present? %>
+               <i class="fa fa-tags" aria-hidden="true"></i>
+                 <% @tags.each do |tag| %>
+                    <%= link_to "＃#{tag.name}", recipes_path(tag_name: tag.name) %>
+                  <% end %>
+              <% end %>
+          </div>
+        <div class ="materials mt-3">
+            <strong> 材料  <i class="fa fa-male" aria-hidden="true"></i> <%= @recipe.serving %>人前</strong>
+              <table class="mt-1">
+                <% @materials.each do |material| %>
+                <tr>
+                <td class="border-bottom border-secondary border-2"><%= material.name %></td>
+                <td class="border-bottom border-secondary border-2"><%= material.quantity %></td>
+      　         </tr>
+      　         <% end %>
+      　       </table>
+      　</div>
+      </div>
+   </div>
+
+    <div class="row">
+       <div class="col-sm-12 mt-4">
+          <h6>作り方</h6>
+            <ul class="count_1">
+              <% @steps.each do |step|%>
+                <li><%= step.explanation %></li>
+              <% end %>
+            </ul>
+        </div>
+    </div>
+
+  <% if  @recipe.note.present? %>
+    <div class="row">
+      <div class="col-sm-7">
+        <div class="box">
+          <strong><i class="fa fa-hand-o-right" aria-hidden="true"></i> コツ</strong><br>
+        　  <%= @recipe.note %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-sm-12 mt-3">
+      <strong>脱レポ 　<i class="fa fa-comment-o" aria-hidden="true"></i> <%= @impressions.count %>件</strong>
+        <% if user_signed_in? %>
+          <button type="button" class="btn btn-info ml-5" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-pencil" aria-hidden="true"></i> 脱レポを投稿する
+          </button>
+        <% end %>
+
+    <div class="col-sm-12 mt-3">
+        <% if @impressions.exists? %>
+            <%= render "impressions/index" %><br>
+            <%= link_to ">> 脱レポ一覧へ",recipe_impressions_path(@recipe.id)%>
+        <% else %>
+             脱レポの投稿はまだありません
+        <% end %>
+    </div>
+
+
+    <div class="col-sm-12 mt-3">
+        <%= link_to "<< レシピ一覧へ",recipes_path %>
+    </div>
   </div>
-<% if user_signed_in? %>
-  <!---お気に入り登録---->
-  <span id="favorite_buttons_<%= @recipe.id %>">
-    <%= render "favorites/favorite", recipe: @recipe %>
-  </span>
-<% end %>
 </div>
 
 
-<div class="row">
-	<div class="col-md-3 col-sm-3">
-  　<div class="recipe_image">
-          <%= attachment_image_tag @recipe, :image, fallback: "no-image-recipe.png", id: "img_prev", style: "height: 200px; width:200px;" %>
-     </div>
-  </div>
-  <div class="col-md-9 col-sm-9 mt-2">
-      　<!---料理紹介--->
-      　<%= @recipe.introduction%>
-      　<!---タグ--->
-      <% if @tags.present? %>
-      <% @tags.each do |tag| %>
-        <%= link_to "＃#{tag.name}", recipes_path(tag_name: tag.name) %>
-      <% end %>
-    <% end %>
 
-    <div class ="materials mt-2">
-          <h5>材料・調味料</h5>
-            <%= @recipe.serving %>人分
-  　       <table>
-              <% @materials.each do |material| %>
-  　         <tr>
-            <td><%= material.name %></td>
-            <td><%= material.quantity %></td>
-  　         </tr>
-  　         <% end %>
-  　       </table>
-  　   </div>
-  </div>
- </div>
-
-
-    <div class="row">
-       <div class="col-md-10 col-sm-10 offset-1 mt-4">
-          <div id ="steps">
-            <h5>作り方</h5>
-                <% @steps.each do |step|%>
-                  <%= step.explanation %>
-                <% end %>
-      　   </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-10 col-sm-10 offset-1 mt-1">
-          <h5>備考</h5>
-        　  <%= @recipe.note %>
-      </div>
-    </div>
-
-<h6>脱レポ</h6>
-<% if user_signed_in? %>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    脱レポを投稿する
-  </button>
-<% end %>
-  <% if @impressions.exists? %>
-    <%= render "impressions/index" %>
-      <%= link_to ">>脱レポ投稿一覧へ",recipe_impressions_path(@recipe.id) %>
-  <% else %>
-       脱レポの投稿はまだありません
-  <% end %>
-
-<% if @recipe.user_id = current_user %>
-  <%= link_to "レシピを編集する", edit_recipe_path(@recipe.id) %>
-  <%= link_to "レシピを削除する", recipe_path(@recipe),data: {confirm: '本当に削除しますか？'}, method: :delete %>
-<% end %>
-
-<%= link_to "<< レシピ一覧へ",recipes_path %>
 
   <!-- モーダルの設定 -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -95,16 +132,37 @@
         </div><!--/.modal-header -->
         <div class="modal-body">
            <%= form_with model: [@recipe,@impression] , url: recipe_impressions_path(@recipe.id) ,local: true do |f| %>
-           <%= f.label :image, "作った料理画像 （任意）"%>
-           <%= f.attachment_field :image %>
-             <%= f.label :impression, "感想 (必須)"%>
-              <%= f.text_area :impression,:size =>"300", class: "form-control"%>
-          </div>
-                  <div class="modal-footer">
-                    <%= f.submit '脱レポを送る'%>
-                     <% end %>
-                    <%= link_to "レシピに戻る", recipe_path(@recipe)%>
-                  </div><!-- /.modal-footer -->
+            <div class="image col-sm-10">
+              <%= f.label :image, "作った料理の画像 （任意）",class: "col-form-label"%>
+              <%= attachment_image_tag @impression, :image, class: "img-square img-thumbnail m-1", fallback: "no-image-recipe.png", size: "200x150" %>
+              <%= f.attachment_field :image, id: "image"  %>
+            </div>
+              <%= f.label :impression, "感想",class: "col-form-label mt-2"%>
+              <%= f.text_area :impression, class: "form-control col-sm-12 mb-3"%>
+        </div>
+        <div class="modal-footer">
+              <%= f.submit "脱レポを送る" ,class: "btn btn-info"%>
+              <%= link_to "キャンセル", recipe_path(@recipe),class: "btn btn-light ml-3"%>
+            <% end %>
+        </div><!-- /.modal-footer -->
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+
+</div>
+
+  <script>
+  $(function() {
+      $('#image').on('change', function() {
+          var selectedFile = this.files[0];
+          var fileReader = new FileReader();
+
+          fileReader.onload = function(event) {
+              var loadedImageUri = event.target.result;
+               $('.img-square').attr('src', loadedImageUri);
+          };
+
+          fileReader.readAsDataURL(selectedFile);
+      });
+  });
+  </script>

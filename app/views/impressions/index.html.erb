@@ -1,11 +1,15 @@
-<h2>脱レポ一覧</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 mt-5">
+      <h4>脱レポ  <%= @impressions.count %>件</h4>
+    </div>
+  </div>
 
-<%= render "impressions/recipe_about" %>
+  <div class="row">
+    <div class="col-sm-12 mt-3 mb-3">
+        <%= render "impressions/index" %>
+    </div>
+  </div>
 
-<p>脱レポ (全 <%= @impressions.count %>件)</p>
-
-   <%= render "impressions/index" %>
-
-
-<%= render "impressions/recipe_link" %>
-
+    <%= link_to "<< レシピに戻る", recipe_path(@recipe.id) %>
+</div>

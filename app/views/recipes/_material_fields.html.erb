@@ -1,10 +1,10 @@
 
 <div class="nested-fields material-label">
   <div class="row mt-1">
-      <div class="field col-5 mt-1"><%= f.text_field :name, placeholder: "材料", class: 'form-control js-material-form' %></div>
-      <div class="field col-2 mt-1"><%= f.text_field :quantity, class: "form-control", placeholder: "分量" %></div>
-      <div class="field col-2 mt-1">
-        <%= link_to_remove_association "#{icon 'fas', 'trash-alt'}".html_safe, f, id: 'remove-btn', class: "btn btn-outline-secondary btn-block" %>
+      <div class="field col-sm-5 mt-1"><%= f.text_field :name, placeholder: "材料", class: 'form-control js-material-form' %></div>
+      <div class="field col-sm-2 mt-1"><%= f.text_field :quantity, class: "form-control", placeholder: "分量" %></div>
+      <div class="field col-sm-1 mt-1">
+        <%= link_to_remove_association "#{icon 'fas', 'trash-alt'}".html_safe, f, id: 'remove-btn', data: {confirm: '本当に削除しますか？'},class: "btn btn-outline-secondary" %>
       </div>
   </div>
 </div>

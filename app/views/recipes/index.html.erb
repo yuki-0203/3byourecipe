@@ -3,7 +3,7 @@
   <% if @tag_recipe.present? %>
       <div class="row">
         <div class="col-lg-12 mt-4">
-            <h4><%= "#{@tag} に関連する投稿" %></h4>
+            <h4><%= "#{@tag_name} に関連するレシピ" %></h4>
                <%= render "recipes/recipe_cardgroup", recipes: @tag_recipe %>
         </div>
       </div>

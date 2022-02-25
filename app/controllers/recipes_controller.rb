@@ -24,8 +24,9 @@ class RecipesController < ApplicationController
     @recipe_step_3 = Recipe.includes([:user]).where(steps_count: '3').order(created_at: :desc).page(params[:page]).per(20)
     @recipe_step_4 = Recipe.includes([:user]).where(steps_count: '4').order(created_at: :desc).page(params[:page]).per(20)
     @recipe_step_5 = Recipe.includes([:user]).where(steps_count: '5').order(created_at: :desc).page(params[:page]).per(20)
-    if  params[:tag_name] # タグ検索用
-      @tag_recipe = Recipe.tagged_with(params[:tag_name])   # タグに紐付く投稿
+    if params[:tag_name] # タグ検索用
+      @tag_name = params[:tag_name]
+      @tag_recipe = Recipe.tagged_with(params[:tag_name]) # タグに紐付く投稿
     end
   end
 

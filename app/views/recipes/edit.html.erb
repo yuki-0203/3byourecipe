@@ -1,52 +1,56 @@
 <div class="container">
-    <div class="row">
-    	<div class="col-lg-10 mt-4">
-        <h4>レシピ編集</h4>
-        </div>
-    </div>
-
-    <div class="row">
-    	<div class="col-lg-12 mt-3 mb-1">
-          <%= form_with model: @recipe , url: recipe_path ,local: true do |f| %>
-              <%= f.label :name, "レシピ名"%>
-              <%= f.text_field :name,:size =>"100", class: "form-control"%>
-	    <div class="col-lg-3 mb-1">
-  	       <div class="recipe_image m-1">
-  	         <!---------プレビュー画像------------->
-                <%= attachment_image_tag @recipe, :image, fallback: "no-image-recipe.png", id: "img_prev", style: "height: 300px; width:350px;" %>
-                <%= f.attachment_field :image %>
-            </div>
+      <div class="row">
+      	<div class="col-lg-10 mt-4">
+          <h4>レシピ編集</h4>
+          </div>
       </div>
 
-      <div class="col-lg-8 mb-1 offset-1">
-            　<%= f.label :introduction,"料理紹介"%>
-            　<%= f.text_area :introduction, :size => "100", class: "form-control"%>
-              <%= f.label :tag_list, "タグ" %>
-              <%= f.text_field :tag_list, value: @recipe.tag_list.join(','), class: "form-control"%>
+          <%= form_with model: @recipe , url: recipe_path ,local: true do |f| %>
+      <div class="form-group row form-inline mt-4">
+                <%= f.label :name, "レシピ名",class: "col-sm-1 col-form-label" %>
+
+                <%= f.text_field :name, class: "form-control col-sm-8"%>
+      </div>
+
+      <div class="row">
+        <div class="item-image col-sm-4">
+            <%= attachment_image_tag @recipe, :image, class: "img-square img-thumbnail m-1", fallback: "no-image-recipe.png", size: "300x200" %>
+            <%= f.attachment_field :image, id: "image"  %>
+        </div>
+
+        <div class="col-sm-8 mb-1">
+            　<%= f.label :introduction,"料理紹介",class: "col-form-label"%>
+            　<%= f.text_area :introduction, class: "form-control col-sm-8"%>
+              <%= f.label :tag_list,"タグ" ,class: "col-form-label"%>
+              <%= f.text_field :tag_list, value: @recipe.tag_list.join(','), placeholder: "「,」で区切って追加できます。 例)丼ぶり,洗い物なし,即席",class: "form-control col-sm-8"%>
             <!----------材料の項目---------------->
-          <div class ="materials mt-2">
-                <%= f.label :serving ,"材料・調味料（最大８種類まで）"%>
-              <%= f.text_field :serving ,:size =>"10" %> 人分
+          <div id="materials">
+              <%= f.label :serving ,"材料・調味料（最大８種類まで）",class: "col-form-label col-sm-5 mt-3"%>
+              <%= f.text_field :serving , class: "col-sm-1" %> 人分
             <!----------材料formの追加ボタン---------------->
             <div class="material-no">
-                <%= link_to_add_association "＋追加",f,:materials,class: "btn btn-info btn-block col-2 ml-4 mb-1",
+              <div id="add-material">
+                <%= link_to_add_association "＋追加",f,:materials,class: "btn-sm btn-info col-1 text-center",
                     data: { association_insertion_method: 'append' }%>
+              </div>
             <!----------fields_for----------------%>
                 <%= f.fields_for :materials , local: true do |t| %>
             <!----------材料formのテンプレート---------------->
                 <%= render "recipes/material_fields", f: t %>
               <% end %>
-            </div>
+          </div>
+          </div>
         </div>
       </div>
 
-       <div class="col-lg-12 mt-2">
+      <div class="form-group row mt-4 mr-1">
+        <div class="col-sm-12">
           <div id ="steps">
             <!----------調理手順の項目---------------->
-            <label>作り方（最大5ステップ）</label>
+            <div class="col-form-label">作り方（最大5ステップ）</div>
             <!----------調理手順formの追加ボタン---------------->
               <div class="step-no">
-                  <%= link_to_add_association "＋追加".html_safe, f, :steps,class: "btn btn-info btn-block col-2 ml-4 mb-1",
+                  <%= link_to_add_association "＋追加".html_safe, f, :steps,class: "btn-sm btn-info col-1 text-center",
                     data: { association_insertion_method: 'append'}%>
             <!----------調理手順formを以下に追加---------------->
                    <%= f.fields_for :steps do |t| %>
@@ -56,31 +60,34 @@
               </div>
           </div>
         </div>
-
-       <div class="col-lg-12 mt-3 mb-1">
-          <%= f.label :note, "コツ"%>
-          <%= f.text_area :note,:size =>"100",class: "form-control" %>
       </div>
 
       <div class="col-lg-12 mt-3 mb-1">
-       <%= f.submit 'レシピを修正する',class: "btn btn-info btn-block col-2 ml-4 mb-1"%>
+          <%= f.label :note, "コツ（任意）",class: "col-form-label"%>
+          <%= f.text_area :note,class: "form-control col-sm-9" %>
+      </div>
+
+      <div class="action col-sm-8 mt-4">
+          <%= f.submit "レシピ修正稿する" ,class: "btn btn-info"%>
+          <%= link_to "キャンセル", recipe_path(@recipe) ,class: "btn btn-light ml-3"%>
       </div>
     <% end %>
-  </div>
 </div>
-<script>
-$(document).on("turbolinks:load", function(){
-  function readURL(input) {
-    if(input.files && input.files[0]){
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('#img_prev').attr('src', e.target.result);
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-  $("#post_post_image").change(function(){
-    readURL(this);
+
+
+<!----画像プレビュー機能--->
+  <script>
+  $(function() {
+      $('#image').on('change', function() {
+          var selectedFile = this.files[0];
+          var fileReader = new FileReader();
+
+          fileReader.onload = function(event) {
+              var loadedImageUri = event.target.result;
+               $('.img-square').attr('src', loadedImageUri);
+          };
+
+          fileReader.readAsDataURL(selectedFile);
+      });
   });
-});
-</script>
+  </script>

@@ -9,7 +9,7 @@
            <p class="card-text text-center mt-2 mb-1"><%= truncate(recipe.introduction, length: 15 ,omission: '…') %></span><br>
            <small>お気に入り登録 <span style="color:#DBB6C6">♥<%= recipe.favorites.count %></span></small>
            </p>
-         <p class="card-footer text-center profile_image border-0 bg-transparent mb-2"><small>by <%=recipe.user.nickname%></small>
+         <p class="card-footer text-center profile_image border-0 bg-transparent"><small>by <%=recipe.user.nickname%></small>
            <%= attachment_image_tag recipe.user, :image, :fill, 30, 30, fallback: "no-image-icon.png"%>
            <br>
            <small><span style="color:gray">最終更新日: <%= l recipe.updated_at %></span></small>

@@ -17,7 +17,7 @@
 
           <div class="form-group row form-inline">
             <%= f.label :is_gender,"性別",class: "col-sm-4 col-form-label"  %>
-            <%= f.label :man,"男性" ,class:"mr-1"%>
+            <%= f.label :man,"男性" ,class:"mr-1",autfocus: true%>
             <%= f.radio_button :is_gender, :man ,class:"mr-4" %>
             <%= f.label :woman,"女性",class:"mr-1" %>
             <%= f.radio_button :is_gender, :woman %>
@@ -48,7 +48,9 @@
           <div class="actions">
             <%= f.submit "新規登録" ,class: "btn btn-info btn-block col-sm-8 mt-4 ml-5"%>
           </div>
+          <div class="messege col-sm-8 mt-1 ml-5">
           <small><%= link_to ">> 登録済みの方はこちら", new_user_session_path %></small>
+          </div>
       <% end %>
   </div>
 </div>

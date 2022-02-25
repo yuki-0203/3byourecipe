@@ -1,16 +1,17 @@
-  <div class="card-group  mt-4 mb-4">
+  <div class="card-group">
      <% @impressions.each do |impression| %>
-       <div class="col-3">
-           <div class="card shadow-sm">
-            <%= attachment_image_tag impression, :image, fallback: "no-image-recipe.png", class: 'card-img-top' %>
-             <p class="card-text m-3"><%=impression.impression %></p>
-              <% if impression.user == current_user %>
-                <%= link_to "#{icon 'fas', 'trash-alt'}".html_safe, recipe_impression_path(impression.recipe,impression),data: {confirm: '本当に削除しますか？'}, method: :delete %>
-              <% end %>
-             <p class="card-footer text-center profile_image border-0 bg-transparent mb-2"><small>by <%=link_to  impression.user.nickname,user_path(impression.user)%></small>
+       <div class="col-3 mt-3">
+           <div class="card-impression shadow-sm" style="height:250px;width: 12rem;">
+             <%= attachment_image_tag impression, :image,fallback: "no-image-recipe.png",class: "card-img-top" %>
+              <p class="card-text text-center mt-2"><%=impression.impression %></p>
+             <p class="card-text text-center profile_image border-0 bg-transparent mb-1">
+              <small>by <%=link_to  impression.user.nickname,user_path(impression.user)%></small>
               <%= attachment_image_tag impression.user, :image, :fill, 30, 30, fallback: "no-image-icon.png"%>
               <br>
               <small><span style="color:gray">投稿日: <%= l impression.created_at %></span></small>
+              <% if impression.user == current_user %>
+                  <%= link_to "#{icon 'fas', 'trash-alt'}".html_safe, recipe_impression_path(impression.recipe,impression),data: {confirm: '本当に削除しますか？'}, method: :delete %>
+                <% end %>
              </p>
            </div>
          </div>

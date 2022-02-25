@@ -91,8 +91,8 @@ ActiveRecord::Schema.define(version: 2022_02_15_044108) do
     t.string "first_name", null: false
     t.integer "phone_number", null: false
     t.integer "is_gender", null: false
-    t.string "nickname"
-    t.text "introduction"
+    t.string "nickname", default: "ニックネーム未登録"
+    t.text "introduction", default: "自己紹介未登録"
     t.text "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

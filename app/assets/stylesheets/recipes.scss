@@ -27,12 +27,42 @@
 }
 
 
-
-
-
-
-//色変えたい、統一したい
-.btn-info {
-  background-color: #C7B2D6;
+//手順カウント（参考サイト：https://nakox.jp/web/css/list_count_css）
+.count_1{
+  counter-reset: chapter;
 }
 
+.count_1 li:before {
+  content: counter(chapter) "";
+  counter-increment: chapter;
+  width: 50px;
+  height: 50px;
+  margin: 0 5px 0 0;
+  padding:5px 10px;
+  border-radius: 50%;
+  background: #D6C7B2;
+  color: #fff;
+  text-align: center;
+  z-index: 1;
+}
+.count_1 li {
+  padding: 10px;
+  list-style: none;
+}
+
+h6{
+  font-weight: bold;
+}
+
+.box {
+    padding: 1em 0.5em;
+    margin: 2em 0;
+    background: #D6C7B2;
+    box-shadow: 0px 0px 0px 10px #D6C7B2;
+    border: dashed 2px #fffafa;
+    border-radius: 8px;
+}
+.box p {
+    margin: 0;
+    padding: 0;
+}

@@ -95,7 +95,7 @@ a, a:visited, a:focus, a:hover {
 .profile_image {
   img{
   border-radius: 50% !important; /* 角丸半径を50%にする(=円形にする) */
-  -centerwidth: 100px ;  /* 縦横を同じ値にする */
+  //centerwidth: 100px ;  /* 縦横を同じ値にする */
   //height: 100px ; /* 縦横を同じ値にする */
   object-fit: cover !important; /* 縦横比固定したまま上2つの縦横の範囲内に収まるように配置する */
  }
@@ -155,9 +155,9 @@ footer{
 }
 
 .card-img-top {
-    max-width: 100%;
+    //max-width: 100%;
     flex-shrink:0;
-    height: 200px;
+    //height: 200px;
  }
 
 .card-title{
@@ -192,3 +192,18 @@ h4:before {
   z-index: -1;
 }
 
+.btn-info, .btn-info:focus, .btn-info:hover, .btn-info:visited{
+  background-color: #C7B2D6 !important;
+  border-radius: 15px;
+  border-color: #C7B2D6 !important;
+}
+
+.btn-danger, .btn-danger:focus, .btn-danger:hover, , .btn-danger:visited{
+  background-color: #DBB6C6 !important;
+  border-radius: 15px;
+  border-color: #DBB6C6 !important;
+}
+
+.btn {
+  border-radius: 15px;
+}
