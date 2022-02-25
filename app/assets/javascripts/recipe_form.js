@@ -11,7 +11,7 @@
   check_to_hide_or_show_add_link();
 
   function check_to_hide_or_show_add_link() {
-    if (('#materials.nested-fields.material-label:visible').length == 2) {
+    if (('.material-label:visible').length == 2) {
       ('#add-material.a').hide();
     } else {
       ('#add-material.a').show();
