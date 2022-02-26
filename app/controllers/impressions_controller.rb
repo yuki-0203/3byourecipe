@@ -5,10 +5,14 @@ class ImpressionsController < ApplicationController
     @impression = current_user.impressions.new(impression_params)
     recipe = Recipe.find(params[:recipe_id])
     @impression.recipe_id = recipe.id
-    if @impression.save
-      redirect_to recipe_path(recipe)
+    if @impression.recipe.user == current_user
+      redirect_to  recipe_path(@impression.recipe)
     else
-      render 'new'
+      if @impression.save
+        redirect_to recipe_path(recipe), success: "脱レポを投稿しました！"
+      else
+        render 'new', danger: "入力内容をご確認ください"
+      end
     end
   end
 
@@ -20,11 +24,10 @@ class ImpressionsController < ApplicationController
   def destroy
     recipe = Recipe.find(params[:recipe_id])
     Impression.find(params[:id]).destroy
-    redirect_to recipe_path(recipe)
+    redirect_to recipe_path(recipe), success: "脱レポを削除しました"
   end
 
   private
-
   def impression_params
     params.require(:impression).permit(:recipe_id, :user_id, :impression, :image, :reply_comment)
   end

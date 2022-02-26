@@ -1,8 +1,7 @@
-
 <div class="container">
     <div class="row">
       <div class="col-sm-10 mt-4">
-        <% if @recipe.user = current_user %>
+        <% if @recipe.user == current_user %>
           <%= link_to "レシピを編集する", edit_recipe_path(@recipe),class: "btn btn-info ml-3" %>
           <%= link_to "レシピを削除する", recipe_path(@recipe),data: {confirm: '本当に削除しますか？'}, method: :delete,class: "btn btn-danger ml-3" %>
         <% end %>
@@ -14,15 +13,10 @@
         <h3><%= @recipe.name%></h3>
       </div>
       <div class="col-sm-3 mt-4 ">
-          <% if user_signed_in? %>
-            <% if current_user != @recipe.user %>
+         <% if user_signed_in? && current_user != @recipe.user_id %>
               <span id="favorite_buttons_<%= @recipe.id %>">
                 <%= render "favorites/favorite", recipe: @recipe %>
               </span>
-            <% else%>
-              <span style="color:#DBB6C6; font-size:23px;">♥</span>
-              <span style="font-size:23px;"><%= @recipe.favorites.count %></span>
-            <% end %>
           <% else %>
               <span style="color:#DBB6C6; font-size:23px;">♥</span>
               <span style="font-size:23px;"><%= @recipe.favorites.count %></span>
@@ -95,10 +89,11 @@
   <div class="row">
     <div class="col-sm-12 mt-3">
       <strong>脱レポ 　<i class="fa fa-comment-o" aria-hidden="true"></i> <%= @impressions.count %>件</strong>
-        <% if user_signed_in? %>
-          <button type="button" class="btn btn-info ml-5" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-pencil" aria-hidden="true"></i> 脱レポを投稿する
-          </button>
+
+        <% if user_signed_in? && current_user != @recipe.user_id %>
+            <button type="button" class="btn btn-info ml-5" data-toggle="modal" data-target="#exampleModal">
+              <i class="fa fa-pencil" aria-hidden="true"></i> 脱レポを投稿する
+            </button>
         <% end %>
 
     <div class="col-sm-12 mt-3">

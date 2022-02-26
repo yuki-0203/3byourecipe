@@ -1,13 +1,13 @@
 <% if current_user.favorites.find_by(recipe_id: recipe) %>
            <span style="color:#DBB6C6; font-size:23px;">♥</span>
            <span style="font-size:23px;"><%= @recipe.favorites.count %></span>
-          <%=link_to recipe_favorites_path(recipe), method: :delete, remote: true ,class: "btn-sm btn-info ml-3" do %>
-          お気に入り登録
+          <%=link_to recipe_favorites_path(recipe), method: :delete, remote: true ,class: "btn-sm btn-light ml-3" do %>
+          お気に入り解除
           <% end %>
   <% else %>
            <span style="color:#DBB6C6; font-size:23px;">♥</span>
            <span style="font-size:23px;"><%= @recipe.favorites.count %></span>
-          <%= link_to recipe_favorites_path(recipe), method: :post, remote: true,class: "btn-sm btn-light ml-3" do %>
-          お気に入り解除
+          <%= link_to recipe_favorites_path(recipe), method: :post, remote: true,class: "btn-sm btn-info ml-3" do %>
+          お気に入り登録
           <% end %>
 <% end %>

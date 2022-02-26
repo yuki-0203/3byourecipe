@@ -14,16 +14,15 @@
         <%= f.email_field :email, autofocus: true, autocomplete: "email",class: "form-control col-sm-8" %>
       </div>
 
-
       <div class="form-group row form-inline">
         <%= f.label :password ,class: "col-sm-4 col-form-label"  %>
         <%= f.password_field :password, autocomplete: "new-password",class: "form-control col-sm-8" %>
       </div>
 
       <div class="actions">
-        <%= f.submit "ログイン" ,class: "btn btn-info btn-block col-sm-9 mt-3 mb-2 "%>
+        <%= f.submit "ログイン" ,class: "btn btn-info btn-block col-sm-9 mt-4 mb-2 "%>
       </div>
-      <div class="messege col-sm-8 mt-1 ml-5">
+      <div class="messege mt-1">
        <small><%= link_to ">> 登録がお済みで無い方はこちら",  new_user_registration_path %></small>
       </div>
     <% end %>
