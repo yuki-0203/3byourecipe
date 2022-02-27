@@ -9,11 +9,15 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
-    if @recipe.save
-      redirect_to recipe_path(@recipe), success: "レシピを作成しました！"
+    if user_signed_in?
+      if @recipe.save
+        redirect_to recipe_path(@recipe), success: "レシピを作成しました！"
+      else
+        render 'new'
+        flash[:alart] = "入力内容をご確認ください"
+      end
     else
-      render 'new'
-      flash[:alart] = "入力内容をご確認ください"
+      redirect_to new_user_session_path
     end
   end
 
@@ -42,28 +46,39 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
+    if current_user != @recipe.user
+      redirect_to recipe_path(@recipe)
+    end
   end
 
   def update
     @recipe = Recipe.find(params[:id])
-    if @recipe.update(recipe_params)
-      redirect_to recipe_path(params[:id]), success: "レシピを修正しました！"
+    if current_user == @recipe.user
+      if @recipe.update(recipe_params)
+        redirect_to recipe_path(params[:id]), success: "レシピを修正しました！"
+      else
+        render 'edit', danger: "入力内容をご確認ください"
+      end
     else
-      render 'edit', danger: "入力内容をご確認ください"
+      redirect_to recipe_path(@recipe)
     end
   end
 
   def destroy
     @recipe = Recipe.find(params[:id])
-    @recipe.destroy
-    redirect_to recipes_path, success: "レシピを削除しました"
+    if current_user == @recipe.user
+      @recipe.destroy
+      redirect_to recipes_path, success: "レシピを削除しました"
+    else
+      redirect_to recipe_path(@recipe)
+    end
   end
 
   private
 
   def recipe_params
     params.require(:recipe).permit(:id, :name, :introduction, :note, :image, :user_id, :tag_list, :serving, :steps_count, :tag_name,
-                                   steps_attributes: %i[id explanation image recipe_id _destroy],
+                                   steps_attributes: %i[id explanation recipe_id _destroy],
                                    materials_attributes: %i[id name recipe_id quantity _destroy])
   end
 end

@@ -255,3 +255,17 @@ h4:before {
    list-style: none;
    margin: auto;
 }
+
+.alert.alert-warning {
+   color:#262626;
+   background:#FFEBE8;
+   border:2px solid #990000 ;
+   padding:12px; font-weight:850;
+   margin-bottom: 20px;
+}
+
+.alert.alert-warning li {
+   font-size: 14px;
+   list-style: none;
+   margin: auto;
+}

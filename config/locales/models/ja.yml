@@ -1,0 +1,37 @@
+ja:
+  activerecord:
+    models:
+      impressions: 脱レポ
+      recipes: レシピ
+      users: ユーザー
+      tags: タグ
+      materials: 材料
+      steps: 調理手順
+
+    attributes:
+      impression:
+        impression: 感想コメント
+        image: 料理画像
+      recipe:
+        name: レシピ名
+        introduction: レシピ紹介文
+        serving: 人数
+        note: コツ
+        image: 料理画像
+      user:
+        email: メールアドレス
+        last_name: 名前(姓)
+        first_name: 名前(名)
+        phone_number: 電話番号
+        is_gender: 性別
+        nickname: ニックネーム
+        introduction: 自己紹介
+        image: プロフィール画像
+      tags:
+        name: タグ名
+      materials:
+        name: 材料名
+        quantity: 分量
+      steps:
+        explanation: 手順の説明
+

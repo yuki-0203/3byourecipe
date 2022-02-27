@@ -1,11 +1,16 @@
-
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 mt-4">
  <% if params[:q][:name_cont] == "" %>　　<%#--空白検索をした時に表示--%>
     <%= "検索キーワードがありません" %>
 
   <% elsif @search_recipes.present? %>　　<%#--検索結果あり--%>
-    <%= "「#{params[:q][:name_cont]}」の検索結果: #{@search_recipes.count}件" %>
+   <h4><%= "「#{params[:q][:name_cont]}」の検索結果: #{@search_recipes.count}件" %></h4>
         <%= render "recipes/recipe_cardgroup", recipes: @search_recipes %>
 
   <% else %>　　<%#--検索結果なし--%>
     <%= "検索に一致するレシピはありませんでした" %>
   <% end %>
+    </div>
+  </div>
+</div>

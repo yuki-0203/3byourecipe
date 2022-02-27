@@ -15,9 +15,6 @@ Rails.application.routes.draw do
   # seachsコントローラ
   resources :seachs, only: [:index]
 
-  # homesコントローラ
-  get 'about', to: 'homes#about'
-
   # usersコントローラ
   resources :users, only: %i[create update edit show] do
     collection do

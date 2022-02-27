@@ -11,7 +11,7 @@ class ImpressionsController < ApplicationController
       if @impression.save
         redirect_to recipe_path(recipe), success: "脱レポを投稿しました！"
       else
-        render 'new', danger: "入力内容をご確認ください"
+        redirect_to recipe_path(recipe) , danger: "投稿できませんでした。感想は1文字以上、50文字以内で入力ください"
       end
     end
   end

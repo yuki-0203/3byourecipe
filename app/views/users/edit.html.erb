@@ -8,6 +8,7 @@
 
   <div class="form-group row mt-5">
       <%= form_with(model: @user,local: true) do |f| %>
+         <%= render "layouts/error_messege" , model: f.object %>
           <div class="form-group row form-inline">
             <%= f.label :last_name,"名前" ,class: "col-sm-4 col-form-label" %>
             <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" ,class: "form-control col-sm-3",placeholder: "姓",autfocus: true %>

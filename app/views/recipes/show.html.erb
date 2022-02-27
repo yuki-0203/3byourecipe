@@ -13,7 +13,7 @@
         <h3><%= @recipe.name%></h3>
       </div>
       <div class="col-sm-3 mt-4 ">
-         <% if user_signed_in? && current_user != @recipe.user_id %>
+         <% if user_signed_in? && current_user != @recipe.user %>
               <span id="favorite_buttons_<%= @recipe.id %>">
                 <%= render "favorites/favorite", recipe: @recipe %>
               </span>
@@ -90,7 +90,7 @@
     <div class="col-sm-12 mt-3">
       <strong>脱レポ 　<i class="fa fa-comment-o" aria-hidden="true"></i> <%= @impressions.count %>件</strong>
 
-        <% if user_signed_in? && current_user != @recipe.user_id %>
+        <% if user_signed_in? && current_user != @recipe.user %>
             <button type="button" class="btn btn-info ml-5" data-toggle="modal" data-target="#exampleModal">
               <i class="fa fa-pencil" aria-hidden="true"></i> 脱レポを投稿する
             </button>
@@ -133,7 +133,7 @@
               <%= f.attachment_field :image, id: "image"  %>
             </div>
               <%= f.label :impression, "感想",class: "col-form-label mt-2"%>
-              <%= f.text_area :impression, class: "form-control col-sm-12 mb-3"%>
+              <%= f.text_area :impression, placeholder: "必須です。50文字以内で入力ください。",class: "form-control col-sm-12 mb-3"%>
         </div>
         <div class="modal-footer">
               <%= f.submit "脱レポを送る" ,class: "btn btn-info"%>

@@ -7,6 +7,7 @@
 
   <div class="form-group row mt-4">
     <%= form_with(model: @user,local: true) do |f| %>
+     <%= render "layouts/error_messege" , model: f.object%>
       <div class="item-image col-sm-10">
         <%= attachment_image_tag @user, :image, class: "img-square img-thumbnail m-1", fallback: "no-image-icon.png", size: "200x150" %>
         <%= f.attachment_field :image, id: "image"  %>
