@@ -32,7 +32,7 @@
 料理をする時
 
 ## 設計書
-検討中
+![脱力レシピ ER図](https://user-images.githubusercontent.com/89877721/155884278-9ac0ce59-5666-4ff6-a54d-09e9285185df.jpg　”脱力レシピ ER図”)
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1RPi70HhyU_9ElGEsZ4HclRXbKQJghvjwhZhB1iWnOU4/edit?usp=sharing
