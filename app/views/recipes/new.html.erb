@@ -51,8 +51,10 @@
             <div class="col-form-label">作り方（最大5ステップ）</div>
             <!----------調理手順formの追加ボタン---------------->
               <div class="step-no">
+                <div id="add-step">
                   <%= link_to_add_association "＋追加".html_safe, f, :steps,class: "btn-sm btn-info col-1 text-center",
                     data: { association_insertion_method: 'append'}%>
+                </div>
             <!----------調理手順formを以下に追加---------------->
                    <%= f.fields_for :steps do |t| %>
              <!----------調理手順formのテンプレート---------------->
