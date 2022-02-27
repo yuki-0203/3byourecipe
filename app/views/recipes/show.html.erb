@@ -89,13 +89,12 @@
   <div class="row">
     <div class="col-sm-12 mt-3">
       <strong>脱レポ 　<i class="fa fa-comment-o" aria-hidden="true"></i> <%= @impressions.count %>件</strong>
-
         <% if user_signed_in? && current_user != @recipe.user %>
             <button type="button" class="btn btn-info ml-5" data-toggle="modal" data-target="#exampleModal">
               <i class="fa fa-pencil" aria-hidden="true"></i> 脱レポを投稿する
             </button>
         <% end %>
-
+    </div>
     <div class="col-sm-12 mt-3">
         <% if @impressions.exists? %>
             <%= render "impressions/index" %><br>
@@ -104,12 +103,11 @@
              脱レポの投稿はまだありません
         <% end %>
     </div>
-
-
     <div class="col-sm-12 mt-3">
         <%= link_to "<< レシピ一覧へ",recipes_path %>
     </div>
   </div>
+
 </div>
 
 

@@ -18,7 +18,7 @@ class ImpressionsController < ApplicationController
 
   def index
     @recipe = Recipe.find(params[:recipe_id])
-    @impressions = Impression.includes([:user])
+    @impressions = Impression.includes([:recipe]).includes([:user])
   end
 
   def destroy

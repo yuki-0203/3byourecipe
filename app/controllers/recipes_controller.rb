@@ -42,7 +42,7 @@ class RecipesController < ApplicationController
     @materials = @recipe.materials
     @steps = @recipe.steps
     @impression = @recipe.impression.new
-    @impressions = Impression.preload(:user)
+    @impressions = Impression.includes([:recipe]).preload(:user)
   end
 
   def edit
