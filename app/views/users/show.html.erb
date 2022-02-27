@@ -15,7 +15,6 @@
           <div class="user_introduction mt-1 mb-2">
             <%= @user.introduction %>
           </div>
-
           <div class="mymenu mt-5">
             <% if @user == current_user %>
               <div class="btn-group-vertical">
@@ -67,14 +66,10 @@
                <p class="text-center mt-5"><i class="fa fa-cutlery" aria-hidden="true"></i>投稿した脱レポはありません</p>
               <% end %>
         </div>
-
-        </div>
-
-
-
-
-
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 mt-5">
+    <%= link_to "<< レシピ一覧へ",recipes_path %>
   </div>
 </div>
-
-  </div>

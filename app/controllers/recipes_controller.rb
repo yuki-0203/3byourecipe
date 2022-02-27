@@ -10,6 +10,7 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     if user_signed_in?
+      #byebug
       if @recipe.save
         redirect_to recipe_path(@recipe), success: "レシピを作成しました！"
       else
@@ -77,7 +78,7 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:id, :name, :introduction, :note, :image, :user_id, :tag_list, :serving, :steps_count, :tag_name,
+    params.require(:recipe).permit(:id, :name, :introduction, :note, :image, :image_id, :user_id, :tag_list, :serving, :steps_count, :tag_name,
                                    steps_attributes: %i[id explanation recipe_id _destroy],
                                    materials_attributes: %i[id name recipe_id quantity _destroy])
   end

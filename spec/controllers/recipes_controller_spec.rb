@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "refile/file_double"
 
 RSpec.describe RecipesController, type: :controller do
     describe "#index" do
@@ -84,20 +84,39 @@ RSpec.describe RecipesController, type: :controller do
     end
 
     describe "#create" do
+      let(:user) { create(:user) }
+      let(:recipe) {attributes_for(:recipe)}
+      let(:material) {attributes_for(:material)}
+      let(:step) {attributes_for(:step)}
       before do
         @user = FactoryBot.create(:user)
       end
         context "ログインユーザーの場合" do
           it "レシピを投稿できること" do
-            pending ("保留")
-              recipe_params = FactoryBot.attributes_for(:recipe)
+              recipe["materials_attributes"] = {"0" => material}
+              recipe["steps_attributes"] = {"0" => step}
               sign_in @user
               expect{
-              post :create, params: { recipe: recipe_params }
-              }.to change(@user.recipes,:count).by(1)
+              post :create, params: { recipe: recipe }
+              }.to change(Recipe,:count).by(1).and change(Material, :count).by(1).and change(Step, :count).by(1)
             end
+        end
+
+        context "ゲストユーザーの場合" do
+          it "レシピを投稿できず、302レスポンスが返ること" do
+              recipe["materials_attributes"] = {"0" => material}
+              recipe["steps_attributes"] = {"0" => step}
+              post :create, params: { recipe: recipe }
+              expect(response).to have_http_status "302"
+            end
+          it "新規登録画面へリダイレクトされること" do
+              recipe["materials_attributes"] = {"0" => material}
+              recipe["steps_attributes"] = {"0" => step}
+              post :create, params: { recipe: recipe }
+            expect(response).to redirect_to new_user_session_path
           end
       end
+    end
 
     describe "#update" do
       let(:user) { create(:user) }

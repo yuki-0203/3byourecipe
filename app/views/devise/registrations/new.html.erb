@@ -45,10 +45,12 @@
             <%= f.password_field :password_confirmation, autocomplete: "new-password",class: "form-control col-sm-8" %>
           </div>
 
-          <div class="actions">
-            <%= f.submit "新規登録" ,class: "btn btn-info btn-block col-sm-8 mt-4 ml-5"%>
+          <div class="action col-sm-12 mt-4">
+            <%= f.submit "新規登録" ,class: "btn btn-info col-sm-6"%>
+            <%= link_to "キャンセル", root_path ,class: "btn btn-light ml-3 col-sm-5"%>
           </div>
-          <div class="messege col-sm-8 mt-1 ml-5">
+
+          <div class="messege col-sm-8 mt-3 ml-2">
           <small><%= link_to ">> 登録済みの方はこちら", new_user_session_path %></small>
           </div>
       <% end %>
