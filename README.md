@@ -1,4 +1,5 @@
 # 脱力レシピ
+<img width="1423" alt="脱力レシピTOP" src="https://user-images.githubusercontent.com/89877721/155913013-df9584fb-f51d-4ebe-a57f-a5c39c5e55e3.png">
 
 ## サイト概要
 時間や手間をかけて料理をしたくない時に使える、簡単レシピの投稿サイトです。<br>
