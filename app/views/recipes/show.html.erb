@@ -36,7 +36,7 @@
 
       <div class="col-sm-9 mt-3">
           <div class="recipe-user">
-              <%= attachment_image_tag @recipe.user, :image, :fill, 30, 30, fallback: "no-image-icon.png"%>
+              <%= attachment_image_tag @recipe.user, :image, fallback: "no-image-icon.png",style: "height: 30px; width:30px;"%>
                <small><%=link_to  @recipe.user.nickname,user_path(@recipe.user)%></small>
           </div>
           <div class="introduction mt-2">

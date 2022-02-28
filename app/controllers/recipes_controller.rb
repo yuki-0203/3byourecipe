@@ -26,6 +26,7 @@ class RecipesController < ApplicationController
     # お気に入り登録数を多い順に最大5件表示
     @recipe_favorite_ranks = Recipe.includes([:user]).find(Favorite.group(:recipe_id).order('count(recipe_id) desc').limit(5).pluck(:recipe_id))
     # step数別、新着順にレシピ表示
+    @recipe_step_1 = Recipe.includes([:user]).where(steps_count: '1').order(created_at: :desc).page(params[:page]).per(20)
     @recipe_step_2 = Recipe.includes([:user]).where(steps_count: '2').order(created_at: :desc).page(params[:page]).per(20)
     @recipe_step_3 = Recipe.includes([:user]).where(steps_count: '3').order(created_at: :desc).page(params[:page]).per(20)
     @recipe_step_4 = Recipe.includes([:user]).where(steps_count: '4').order(created_at: :desc).page(params[:page]).per(20)
@@ -42,7 +43,7 @@ class RecipesController < ApplicationController
     @materials = @recipe.materials
     @steps = @recipe.steps
     @impression = @recipe.impression.new
-    @impressions = Impression.includes([:recipe]).preload(:user)
+    @impressions = Impression.includes([:recipe]).preload(:user).where(recipe: @recipe.id)
   end
 
   def edit

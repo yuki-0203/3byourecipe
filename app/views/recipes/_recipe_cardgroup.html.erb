@@ -10,7 +10,7 @@
            <small>お気に入り登録 <span style="color:#DBB6C6">♥<%= recipe.favorites.count %></span></small>
            </p>
          <p class="card-footer text-center profile_image border-0 bg-transparent"><small>by <%=recipe.user.nickname%></small>
-           <%= attachment_image_tag recipe.user, :image, :fill, 30, 30, fallback: "no-image-icon.png"%>
+           <%= attachment_image_tag recipe.user, :image, fallback: "no-image-icon.png",style: "height: 30px; width:30px;"%>
            <br>
            <small><span style="color:gray">最終更新日: <%= l recipe.updated_at %></span></small>
          </p>

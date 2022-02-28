@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2022_02_15_044108) do
     t.datetime "remember_created_at"
     t.string "last_name", null: false
     t.string "first_name", null: false
-    t.integer "phone_number", null: false
+    t.string "phone_number", null: false
     t.integer "is_gender", null: false
     t.string "nickname", default: "ニックネーム未登録"
     t.text "introduction", default: "自己紹介未登録"
