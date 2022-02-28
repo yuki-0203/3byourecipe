@@ -34,7 +34,7 @@ $(function() {
   check_to_hide_or_show_add_link();
 
   function check_to_hide_or_show_add_link() {
-    if ($('.material-label:visible').length == 8) {
+    if ($('.nested-fields.material-label:visible').length == 8) {
       $('#add-material a.btn-sm.btn-info.col-1.text-center.add_fields').hide();
     } else {
       $('#add-material a.btn-sm.btn-info.col-1.text-center.add_fields').show();
@@ -55,7 +55,7 @@ $(function() {
   check_to_hide_or_show_add_link();
 
   function check_to_hide_or_show_add_link() {
-    if ($('.step-label:visible').length == 5) {
+    if ($('.nested-fields.step-label:visible').length == 5) {
       $('#add-step a.btn-sm.btn-info.col-1.text-center.add_fields').hide();
     } else {
       $('#add-step a.btn-sm.btn-info.col-1.text-center.add_fields').show();
