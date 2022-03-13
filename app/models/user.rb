@@ -16,4 +16,18 @@ class User < ApplicationRecord
   validates :password_confirmation, confirmation: true, on: :create
   validates :password, presence: true, unless: :id?, on: :create
   validates :introduction, length: { maximum: 50 }
+
+  def self.guest
+    find_or_create_by!(email: 'aaa@aaa.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.password_confirmation = user.password
+      user.last_name = 'ゲスト姓'
+      user.first_name = 'ゲスト名'
+      user.phone_number = '09000000000'
+      user.is_gender = 1
+      user.nickname = 'ゲスト'
+      user.introduction = 'ゲストです!!'
+    end
+  end
+
 end
