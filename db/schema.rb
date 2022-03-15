@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_15_044108) do
+ActiveRecord::Schema.define(version: 2022_03_13_123302) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "recipe_id", null: false
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2022_02_15_044108) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "steps_count", default: 0, null: false
+  end
+
+  create_table "sns_credentials", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sns_credentials_on_user_id"
   end
 
   create_table "steps", force: :cascade do |t|

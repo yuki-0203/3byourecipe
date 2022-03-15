@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+   omniauth_callbacks: 'users/omniauth_callbacks',
+   registrations: 'users/registrations'}
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#new_guest'
   end
-  root 'recipes#index'
+  root to: 'recipes#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # resipes,favorites,impressionsコントローラ

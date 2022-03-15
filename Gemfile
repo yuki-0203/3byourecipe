@@ -50,6 +50,10 @@ gem 'refile', require: 'refile/rails', github: 'manfe/refile'
 gem 'refile-mini_magick'
 gem 'rmagick'
 gem 'rails-i18n'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
