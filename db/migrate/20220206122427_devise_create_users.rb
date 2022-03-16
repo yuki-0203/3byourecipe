@@ -35,7 +35,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       # 追記
       t.string :last_name, null: false
       t.string :first_name, null: false
-      t.string :phone_number, null: false
+      t.string :phone_number
       t.integer :is_gender, null: false
       t.string :nickname, default: 'ニックネーム未登録'
       t.text :introduction, default: '自己紹介未登録'
@@ -46,7 +46,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
     add_index :users, :last_name
     add_index :users, :first_name
     add_index :users, :is_gender
-    add_index :users, :phone_number,         unique: true
+    add_index :users, :phone_number
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true

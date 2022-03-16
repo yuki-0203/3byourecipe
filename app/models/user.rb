@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable,omniauth_providers: [:twitter,:google_oauth2]
+         :recoverable, :rememberable, :validatable, :omniauthable,omniauth_providers: [:google_oauth2]
   enum is_gender: { man: 0, woman: 1 }
   has_many :recipes, dependent: :destroy
   has_many :impressions, dependent: :destroy
@@ -31,16 +31,12 @@ class User < ApplicationRecord
     end
   end
 
-
-
-    def self.find_omniauth(auth)#SNS認証での新規登録またはsnsログイン
+  def self.find_omniauth(auth)#SNS認証での新規登録またはsnsログイン
     sns_credential = SnsCredential.where(uid: auth.uid, provider: auth.provider).first
-         binding.pry
     unless sns_credential.blank?#sns認証済み(ログイン)
-      user = User.find(sns_credential.user)
+      user = User.find(sns_credential.user.id)
     else#sns認証での新規登録
       temp_pass = Devise.friendly_token[0,20]#今回は取り敢えずランダムなパスワードを作ります
-        if auth.provider = "google_oauth2"
         user = User.create!(
           last_name: auth.info.last_name,
           first_name: auth.info.first_name,
@@ -52,36 +48,22 @@ class User < ApplicationRecord
           password: temp_pass,
           password_confirmation: temp_pass,
           )
-        elsif auth.provider = "twitter"
-          user = User.create!(
-            last_name: '未設定',
-            first_name: '未設定',
-            phone_number: auth.info.phone_number,
-            is_gender: 1,
-            nickname: '未設定',
-            introduction: '未設定',
-            email: auth.info.email,
-            password: temp_pass,
-            password_confirmation: temp_pass,
-          )
+        sns_credential = SnsCredential.create!(
+          user_id: user.id,
+          provider: auth.provider,
+          uid: auth.uid,
+           )
         end
+    return user
+  end
+
+   def self.attach_social(auth, user_id)#sns連携追加時
       sns_credential = SnsCredential.create!(
-        user_id: user.id,
+        user_id: user_id,
         provider: auth.provider,
         uid: auth.uid,
       )
-    end
-
-    return user
- end
-
- def self.attach_social(auth, user_id)#sns連携追加時
-    sns_credential = SnsCredential.create!(
-      user_id: user_id,
-      provider: auth.provider,
-      uid: auth.uid,
-    )
-  end
+   end
 
 
 end

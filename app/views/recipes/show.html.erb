@@ -23,7 +23,7 @@
           <% end %>
       </div>
       <div class="col-sm-3 mt-4">
-        <p><small><span style="color:gray">最終更新日: <%= l @recipe.updated_at %></span></small><p>
+        <p><small><span style="color:gray">最終更新日: <%= @recipe.updated_at %></span></small><p>
       </div>
     </div>
 
@@ -145,17 +145,17 @@
 </div>
 
   <script>
-  $(function() {
-      $('#image').on('change', function() {
-          var selectedFile = this.files[0];
-          var fileReader = new FileReader();
+    $(function() {
+        $('#image').on('change', function() {
+            var selectedFile = this.files[0];
+            var fileReader = new FileReader();
 
-          fileReader.onload = function(event) {
-              var loadedImageUri = event.target.result;
-               $('.img-square').attr('src', loadedImageUri);
-          };
+            fileReader.onload = function(event) {
+                var loadedImageUri = event.target.result;
+                 $('.img-square').attr('src', loadedImageUri);
+            };
 
-          fileReader.readAsDataURL(selectedFile);
-      });
-  });
+            fileReader.readAsDataURL(selectedFile);
+        });
+    });
   </script>

@@ -24,6 +24,12 @@
         <%= link_to "キャンセル", root_path ,class: "btn btn-light ml-3 col-sm-5"%>
       </div>
 
+      <div class="google_login col-sm-12 mt-3">
+        <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post do %>
+          <%= image_tag 'btn_google_signin_dark_normal_web.png'%>
+        <% end %>
+      </div>
+
       <div class="guest_login col-sm-12 mt-3">
         <%= link_to "ゲストログイン（閲覧用）",users_guest_sign_in_path, method: :post,class: "btn btn-outline-secondary btn-sm " %>
       </div>
@@ -31,6 +37,7 @@
       <div class="messege mt-3">
        <small><%= link_to ">> 登録がお済みで無い方はこちら",  new_user_registration_path %></small>
       </div>
+
     <% end %>
   </div>
 </div>

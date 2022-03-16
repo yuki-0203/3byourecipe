@@ -50,6 +50,12 @@
             <%= link_to "キャンセル", root_path ,class: "btn btn-light ml-3 col-sm-5"%>
           </div>
 
+          <div class="google_login col-sm-12 mt-3">
+            <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post do %>
+              <%= image_tag 'btn_google_signin_dark_normal_web.png'%>
+            <% end %>
+          </div>
+
           <div class="guest_login col-sm-12 mt-3">
           <%= link_to "ゲストログイン（閲覧用）",users_guest_sign_in_path, method: :post,class: "btn btn-outline-secondary btn-sm " %>
           </div>
@@ -57,26 +63,6 @@
           <div class="messege col-sm-8 mt-3 ml-2">
           <small><%= link_to ">> 登録済みの方はこちら", new_user_session_path %></small>
           </div>
-
-          <%= link_to 'Twitterで登録', user_twitter_omniauth_authorize_path, method: :post%>
-          <%= link_to 'Googleで登録', user_google_oauth2_omniauth_authorize_path, method: :post%>
-          <%if @sns_id.present? %>
-             <%= hidden_field_tag :sns_auth, true %>
-           <% else %>
-             <div class="field">
-               <%= f.label :password %>
-               <% @minimum_password_length %>
-               <em>(<%= @minimum_password_length %> characters minimum)</em>
-               <br />
-               <%= f.password_field :password, autocomplete: "new-password" %>
-             </div>
-          
-             <div class="field">
-               <%= f.label :password_confirmation %><br />
-               <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-             </div>
-           <% end %>
-
       <% end %>
   </div>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_123302) do
+ActiveRecord::Schema.define(version: 2022_03_16_122604) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "recipe_id", null: false
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2022_03_13_123302) do
     t.datetime "remember_created_at"
     t.string "last_name", null: false
     t.string "first_name", null: false
-    t.string "phone_number", null: false
+    t.string "phone_number"
     t.integer "is_gender", null: false
     t.string "nickname", default: "ニックネーム未登録"
     t.text "introduction", default: "自己紹介未登録"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2022_03_13_123302) do
     t.index ["first_name"], name: "index_users_on_first_name"
     t.index ["is_gender"], name: "index_users_on_is_gender"
     t.index ["last_name"], name: "index_users_on_last_name"
-    t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
+    t.index ["phone_number"], name: "index_users_on_phone_number"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

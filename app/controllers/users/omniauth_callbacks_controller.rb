@@ -17,7 +17,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   provider = provider.to_s
 
     if user_signed_in?
-      
       @user = current_user
       User.attach_social(request.env['omniauth.auth'], @user.id)#後でattach_social作る。SNSからの情報とログイン中のUserのidを渡す。
     else
@@ -25,7 +24,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     if @user.persisted?#登録済みor登録できたら
-      flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
+      flash[:success] = "ログインに成功しました！"
       sign_in_and_redirect @user, event: :authentication
     else
       session["devise.#{provider}_data"] = request.env['omniauth.auth']
