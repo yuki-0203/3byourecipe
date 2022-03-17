@@ -37,8 +37,10 @@
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1RPi70HhyU_9ElGEsZ4HclRXbKQJghvjwhZhB1iWnOU4/edit?usp=sharing
-![demo](https://user-images.githubusercontent.com/89877721/158814585-c836710b-f85f-45a9-a94f-344919d3333a.gif)
-![Uploading ダウンロード.gif…]()
+
+![ダウンロード](https://user-images.githubusercontent.com/89877721/158818523-1b1fb728-9247-4a30-b687-251a8ba00ae9.gif)
+
+
 
 
 ## 開発環境
