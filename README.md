@@ -37,6 +37,9 @@
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1RPi70HhyU_9ElGEsZ4HclRXbKQJghvjwhZhB1iWnOU4/edit?usp=sharing
+![demo](https://user-images.githubusercontent.com/89877721/158814585-c836710b-f85f-45a9-a94f-344919d3333a.gif)
+![Uploading ダウンロード.gif…]()
+
 
 ## 開発環境
 - OS：Linux(CentOS)
