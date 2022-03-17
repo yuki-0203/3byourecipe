@@ -37,8 +37,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :first_name, null: false
       t.string :phone_number
       t.integer :is_gender, null: false
-      t.string :nickname, default: 'ニックネーム未登録'
-      t.text :introduction, default: '自己紹介未登録'
+      t.string :nickname
+      t.text :introduction
       t.text :image_id
       t.timestamps null: false
     end
