@@ -127,7 +127,7 @@
            <%= form_with model: [@recipe,@impression] , url: recipe_impressions_path(@recipe.id) ,local: true do |f| %>
             <div class="image col-sm-10">
               <%= f.label :image, "作った料理の画像 （任意）",class: "col-form-label"%>
-              <%= attachment_image_tag @impression, :image, class: "img-square img-thumbnail m-1", fallback: "no-image-recipe.png", size: "200x150" %>
+              <%= attachment_image_tag @impression, :image, class: "img-square img-thumbnail m-1", fallback: "cooking.png", size: "200x150" %>
               <%= f.attachment_field :image, id: "image"  %>
             </div>
               <%= f.label :impression, "感想",class: "col-form-label mt-2"%>
