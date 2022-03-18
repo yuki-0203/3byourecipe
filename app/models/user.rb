@@ -19,7 +19,7 @@ class User < ApplicationRecord
   validates :introduction, length: { maximum: 50 }
 
  #Mysqlでtext型はデフォルト登録できないためモデルで処理
-  after_save do
+  after_create do
     update_column(:nickname,"ニックネーム未登録")
     update_column(:introduction,"自己紹介未登録")
   end
