@@ -1,7 +1,7 @@
   <div class="card-group">
      <% @impressions.each do |impression| %>
        <div class="col-3 mt-3">
-           <div class="card-impression shadow-sm" style="height:250px;width: 12rem;">
+           <div class="card-impression shadow-sm" style="height:270px;width: 13rem;">
              <%= attachment_image_tag impression, :image,fallback: "no-image-recipe.png",class: "card-img-top",style: "height:130px;width: 12rem;"%>
               <p class="card-text text-center mt-2"><%=impression.impression %></p>
              <p class="card-text text-center profile_image border-0 bg-transparent mb-1">
