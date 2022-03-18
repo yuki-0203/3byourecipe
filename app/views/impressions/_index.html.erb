@@ -2,16 +2,18 @@
      <% @impressions.each do |impression| %>
        <div class="col-3 mt-3">
            <div class="card-impression shadow-sm" style="height:270px;width: 13rem;">
-             <%= attachment_image_tag impression, :image,fallback: "no-image-recipe.png",class: "card-img-top",style: "height:130px;width: 12rem;"%>
-              <p class="card-text text-center mt-2"><%=impression.impression %></p>
+             <% if impression.image present? %>
+              <%= attachment_image_tag impression, :image,fallback: "no-image-recipe.png",class: "card-img-top",style: "height:130px;width: 13rem;"%>
+             <% end %>
+             <p class="card-text text-center mt-2"><%=impression.impression %></p>
              <p class="card-text text-center profile_image border-0 bg-transparent mb-1">
-              <small>by <%=link_to  impression.user.nickname,user_path(impression.user)%></small>
-              <%= attachment_image_tag impression.user, :image,fallback: "no-image-icon.png",style: "height: 30px; width:30px;"%>
-              <br>
-              <small><span style="color:gray">投稿日: <%= l impression.created_at %></span></small>
-              <% if impression.user == current_user %>
-                  <%= link_to "#{icon 'fas', 'trash-alt'}".html_safe, recipe_impression_path(impression.recipe,impression),data: {confirm: '本当に削除しますか？'}, method: :delete %>
-                <% end %>
+               <small>by <%=link_to  impression.user.nickname,user_path(impression.user)%></small>
+               <%= attachment_image_tag impression.user, :image,fallback: "no-image-icon.png",style: "height: 30px; width:30px;"%>
+               <br>
+               <small><span style="color:gray">投稿日: <%= l impression.created_at %></span></small>
+               <% if impression.user == current_user %>
+                   <%= link_to "#{icon 'fas', 'trash-alt'}".html_safe, recipe_impression_path(impression.recipe,impression),data: {confirm: '本当に削除しますか？'}, method: :delete %>
+               <% end %>
              </p>
            </div>
          </div>
