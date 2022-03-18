@@ -18,6 +18,12 @@ class User < ApplicationRecord
   validates :password, presence: true, unless: :id?, on: :create
   validates :introduction, length: { maximum: 50 }
 
+ #Mysqlでtext型はデフォルト登録できないためモデルで処理
+  after_save do
+    update_column(:nickname,"ニックネーム未登録")
+    update_column(:introduction,"自己紹介未登録")
+  end
+
   def self.guest
     find_or_create_by!(email: 'aaa@aaa.com') do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -34,9 +40,9 @@ class User < ApplicationRecord
   def self.find_omniauth(auth)#SNS認証での新規登録またはsnsログイン
     sns_credential = SnsCredential.where(uid: auth.uid, provider: auth.provider).first
     unless sns_credential.blank?#sns認証済み(ログイン)
-      user = User.find(sns_credential.user.id)
+      user = User.find(sns_credential.user_id)
     else#sns認証での新規登録
-      temp_pass = Devise.friendly_token[0,20]#今回は取り敢えずランダムなパスワードを作ります
+      temp_pass = Devise.friendly_token[0,20]
         user = User.create!(
           last_name: auth.info.last_name,
           first_name: auth.info.first_name,
@@ -53,17 +59,16 @@ class User < ApplicationRecord
           provider: auth.provider,
           uid: auth.uid,
            )
-        end
+    end
     return user
   end
 
-   def self.attach_social(auth, user_id)#sns連携追加時
-      sns_credential = SnsCredential.create!(
-        user_id: user_id,
-        provider: auth.provider,
-        uid: auth.uid,
+  def self.attach_social(auth, user_id)#sns連携追加時
+    sns_credential = SnsCredential.create!(
+      user_id: user_id,
+      provider: auth.provider,
+      uid: auth.uid,
       )
-   end
-
+  end
 
 end
