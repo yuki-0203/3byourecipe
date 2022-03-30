@@ -3,14 +3,14 @@
    <div class="col-3">
      <div class="card shadow-sm">
       <a href="/recipes/<%= recipe.id %>">
-       <%= attachment_image_tag recipe, :image, fallback: "no-image-recipe.png", class: 'card-img-top' %>
+       <%= attachment_image_tag recipe, :image, fallback: "no-image-recipe.png", class: 'card-img-top',style: "object-fit:contain;"%>
         <h5 class="card-title text-center  font-weight-bold mt-3"><%= recipe.name%></h5>
           <!---15文字以上は「…」になる（参考記事：https://qiita.com/ishidamakot/items/2e74d980b3a338e4c784)---->
            <p class="card-text text-center mt-2 mb-1"><%= truncate(recipe.introduction, length: 15 ,omission: '…') %></span><br>
            <small>お気に入り登録 <span style="color:#DBB6C6">♥<%= recipe.favorites.count %></span></small>
            </p>
          <p class="card-footer text-center profile_image border-0 bg-transparent"><small>by <%=recipe.user.nickname%></small>
-           <%= attachment_image_tag recipe.user, :image, fallback: "no-image-icon.png",style: "height: 30px; width:30px;"%>
+           <%= attachment_image_tag recipe.user, :image, fallback: "no-image-icon.png",style: "height: 30px; width:30px; object-fit:contain;"%>
            <br>
            <small><span style="color:gray">最終更新日: <%= l recipe.updated_at %></span></small>
          </p>

@@ -30,7 +30,7 @@
     <div class="row">
     	<div class="col-sm-3">
       　<div class="recipe_image">
-              <%= attachment_image_tag @recipe, :image, fallback: "no-image-recipe.png", style: "height: 230px; width:260px;",class:"img-fluid" %>
+              <%= attachment_image_tag @recipe, :image, fallback: "no-image-recipe.png", style: "height: 230px; width:260px; object-fit:contain;",class:"img-fluid" %>
         </div>
       </div>
 
@@ -110,9 +110,6 @@
 
 </div>
 
-
-
-
   <!-- モーダルの設定 -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
@@ -125,23 +122,20 @@
         </div><!--/.modal-header -->
         <div class="modal-body">
            <%= form_with model: [@recipe,@impression] , url: recipe_impressions_path(@recipe.id) ,local: true do |f| %>
-            <div class="image col-sm-10">
-              <%= f.label :image, "作った料理の画像 （任意）",class: "col-form-label"%>
+                <%= f.label :image, "作った料理の画像 （任意）",class: "col-form-label col-sm-12"%>
               <%= attachment_image_tag @impression, :image, class: "img-square img-thumbnail m-1", fallback: "cooking.png", size: "200x150" %>
               <%= f.attachment_field :image, id: "image"  %>
-            </div>
-              <%= f.label :impression, "感想",class: "col-form-label mt-2"%>
+              <%= f.label :impression, "感想",class: "col-form-label mt-2 col-12"%>
               <%= f.text_area :impression, placeholder: "必須です。50文字以内で入力ください。",class: "form-control col-sm-12 mb-3"%>
+              <%= f.submit "脱レポを送る" ,class: "btn btn-info col-sm-6"%>
         </div>
         <div class="modal-footer">
-              <%= f.submit "脱レポを送る" ,class: "btn btn-info"%>
               <%= link_to "キャンセル", recipe_path(@recipe),class: "btn btn-light ml-3"%>
             <% end %>
         </div><!-- /.modal-footer -->
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-
 </div>
 
   <script>
