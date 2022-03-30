@@ -2,7 +2,7 @@
      <% @impressions.each do |impression| %>
        <div class="col-3 mt-3">
            <div class="card-impression shadow-sm" style="height:270px;width: 13rem;">
-              <%= attachment_image_tag impression, :image,fallback: "cooking.png",class: "card-img-top",style: "object-fit:contain;"%>
+              <%= attachment_image_tag impression, :image,fallback: "cooking.png",class: "card-img-top",style: "height:130px;object-fit:contain;"%>
              <p class="card-text text-center mt-2"><%=impression.impression %></p>
              <p class="card-text text-center profile_image border-0 bg-transparent mb-1">
                <small>by <%=link_to  impression.user.nickname,user_path(impression.user)%></small>
