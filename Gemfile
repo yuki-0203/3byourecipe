@@ -48,7 +48,7 @@ gem 'kaminari'
 gem 'ransack'
 gem 'refile', require: 'refile/rails', github: 'manfe/refile'
 gem 'refile-mini_magick'
-gem 'rmagick'
+gem "mini_magick"
 gem 'rails-i18n'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"

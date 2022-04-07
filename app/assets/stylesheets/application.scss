@@ -267,3 +267,8 @@ h4:before {
    list-style: none;
    margin: auto;
 }
+
+.required:before {
+    content: " *";
+    color: red;
+}

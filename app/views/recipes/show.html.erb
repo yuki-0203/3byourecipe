@@ -122,10 +122,10 @@
         </div><!--/.modal-header -->
         <div class="modal-body">
            <%= form_with model: [@recipe,@impression] , url: recipe_impressions_path(@recipe.id) ,local: true do |f| %>
-                <%= f.label :image, "作った料理の画像 （任意）",class: "col-form-label col-sm-12"%>
+                <%= f.label :image, "作った料理の画像",class: "col-form-label col-sm-12"%>
               <%= attachment_image_tag @impression, :image, class: "img-square img-thumbnail m-1", fallback: "cooking.png", size: "200x150" %>
               <%= f.attachment_field :image, id: "image"  %>
-              <%= f.label :impression, "感想",class: "col-form-label mt-2 col-12"%>
+              <%= f.label :impression, "感想",class: "required col-form-label mt-2 col-12"%>
               <%= f.text_area :impression, placeholder: "必須です。50文字以内で入力ください。",class: "form-control col-sm-12 mb-3"%>
               <%= f.submit "脱レポを送る" ,class: "btn btn-info col-sm-6"%>
         </div>
