@@ -1,0 +1,82 @@
+
+
+    <div class="row">
+      <div class="col-sm-6 mt-4">
+        <h3><%= @recipe.name%></h3>
+      </div>
+
+
+    <div class="row">
+    	<div class="col-sm-3">
+      　<div class="recipe_image">
+              <%= attachment_image_tag @recipe, :image, fallback: "no-image-recipe.png", style: "height: 230px; width:260px; object-fit:contain;",class:"img-fluid" %>
+        </div>
+      </div>
+
+      <div class="col-sm-9 mt-3">
+
+          <div class="introduction mt-2">
+            <%= @recipe.introduction %>
+          </div>
+          <div class="tag mt-2 ml-3">
+              <% if @tags.present? %>
+               <i class="fa fa-tags" aria-hidden="true"></i>
+                 <% @tags.each do |tag| %>
+                    <%= link_to "＃#{tag.name}", recipes_path(tag_name: tag.name) %>
+                  <% end %>
+              <% end %>
+          </div>
+        <div class ="materials mt-3">
+            <strong> 材料  <i class="fa fa-male" aria-hidden="true"></i> <%= @recipe.serving %>人前</strong>
+              <table class="mt-1">
+                <% @materials.each do |material| %>
+                <tr>
+                <td class="border-bottom border-secondary border-2"><%= material.name %></td>
+                <td class="border-bottom border-secondary border-2"><%= material.quantity %></td>
+      　         </tr>
+      　         <% end %>
+      　       </table>
+      　</div>
+      </div>
+   </div>
+
+    <div class="row">
+       <div class="col-sm-12 mt-4">
+          <h6>作り方</h6>
+            <ul class="count_1">
+              <% @steps.each do |step|%>
+                <li><%= step.explanation %></li>
+              <% end %>
+            </ul>
+        </div>
+    </div>
+
+  <% if  @recipe.note.present? %>
+    <div class="row">
+      <div class="col-sm-7">
+        <div class="box">
+          <strong><i class="fa fa-hand-o-right" aria-hidden="true"></i> コツ</strong><br>
+        　  <%= @recipe.note %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+ 
+ 
+ 
+ <%= form_with(model: @recipe, local: true, id: "confirm-event") do |f| %>
+      <%= f.hidden_field :name %>
+      <%= f.hidden_field :introduction %>
+      <%= f.hidden_field :note %>
+      <%= f.hidden_field :image %>
+      <%= f.hidden_field :user_id %>
+      <%= f.hidden_field :tag_list %>
+      <%= f.hidden_field :serving %>
+      <%= f.hidden_field :steps_count %>
+      <%= f.hidden_field :explanation %>
+      <%= f.hidden_field :recipe_id %>
+      <%= f.hidden_field :name %>
+      <%= f.hidden_field :quantity %>
+      <%= f.submit "作成", class: "complete-btn" %>
+      <%= f.submit "修正", name: :back, class: "back-btn" %>
+<% end %>

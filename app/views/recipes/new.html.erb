@@ -5,7 +5,7 @@
           </div>
       </div>
 
-          <%= form_with model: @recipe , url: recipes_path ,local: true do |f| %>
+          <%= form_with model: @recipe , url: confirm_recipes_path ,local: true do |f| %>
               <%= render "layouts/error_messege" , model: f.object%>
               <%= f.hidden_field :user_id, value: current_user.id %>
       <div class="form-group row form-inline mt-4">
@@ -71,7 +71,7 @@
       </div>
 
       <div class="action col-sm-8 mt-4">
-          <%= f.submit "レシピを投稿する" ,class: "btn btn-info"%>
+          <%= f.submit "投稿内容を確認する" ,class: "btn btn-info"%>
           <%= link_to "キャンセル", root_path ,class: "btn btn-light ml-3"%>
       </div>
     <% end %>

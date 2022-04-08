@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   # resipes,favorites,impressionsコントローラ
   resources :recipes  do
+    collection do
+      post :confirm
+    end
      resource :favorites, only: %i[create destroy]
      resources :impressions , only: %i[index create destroy]
   end

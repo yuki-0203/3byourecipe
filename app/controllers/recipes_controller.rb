@@ -6,6 +6,16 @@ class RecipesController < ApplicationController
     @recipe.materials.build
     @recipe.steps.build
   end
+  
+  def confirm
+    @recipe = Recipe.new(recipe_params)
+    @materials = @recipe.materials
+    @steps =  @recipe.steps
+    @tags = @recipe.tag_counts_on(:tags)
+    if @recipe.invalid? 
+      render :new
+    end
+  end
 
   def create
     @recipe = Recipe.new(recipe_params)
