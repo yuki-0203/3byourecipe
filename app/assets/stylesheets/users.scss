@@ -13,3 +13,17 @@
 .img{
   object-fit: cover;
 }
+
+//新規登録の性別選択ボタン
+.radiobutton {
+  display: none;
+}
+.radiobutton_label {
+  background-color: #f8f9fa;
+  outline: 1px solid #d0d0d0; 
+  padding: 5px 40px;
+  border-radius: 5px;
+}
+.radiobutton:checked + .radiobutton_label {
+  background-color: #DBB6C6; 
+}
