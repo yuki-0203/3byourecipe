@@ -14,7 +14,6 @@
 - レシピをお気に入り登録
 - お気に入り登録ランキング
 - レシピ検索（レシピ名・タグ名）
-- ✖️フォロー機能（進捗によって実装検討）
 
 
 ### サイトテーマ
@@ -38,9 +37,6 @@
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1RPi70HhyU_9ElGEsZ4HclRXbKQJghvjwhZhB1iWnOU4/edit?usp=sharing
 
-![ダウンロード](https://user-images.githubusercontent.com/89877721/158818523-1b1fb728-9247-4a30-b687-251a8ba00ae9.gif)
-
-
 
 
 ## 開発環境
@@ -51,4 +47,4 @@ https://docs.google.com/spreadsheets/d/1RPi70HhyU_9ElGEsZ4HclRXbKQJghvjwhZhB1iWn
 - IDE：Cloud9
 
 ## 使用素材
-検討中
+https://www.linustock.com/
