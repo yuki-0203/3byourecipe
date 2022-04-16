@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_123302) do
+ActiveRecord::Schema.define(version: 2022_04_16_054424) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "recipe_id", null: false
@@ -34,6 +34,21 @@ ActiveRecord::Schema.define(version: 2022_03_13_123302) do
     t.string "quantity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "recipe_id"
+    t.integer "impression_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["impression_id"], name: "index_notifications_on_impression_id"
+    t.index ["recipe_id"], name: "index_notifications_on_recipe_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
 
   create_table "recipes", force: :cascade do |t|

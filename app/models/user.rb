@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :impressions, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :sns_credentials
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
   attachment :image
 
   validates :last_name, presence: true

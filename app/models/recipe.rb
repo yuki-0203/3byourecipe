@@ -6,6 +6,7 @@ class Recipe < ApplicationRecord
   has_many :steps, inverse_of: :recipe, dependent: :destroy
   accepts_nested_attributes_for :steps, allow_destroy: true
   has_many :impression, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   validates :name, presence: true, length: { in: 1..40 }
   validates :introduction, presence: true, length: { in: 1..80 }
@@ -14,4 +15,19 @@ class Recipe < ApplicationRecord
 
   attachment :image
   acts_as_taggable # タグ
+  
+  def create_notification_like!(current_user)
+    # すでに「いいね」されているか検索
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and recipe_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
+    # いいねされていない場合のみ、通知レコードを作成
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        recipe_id: id,
+        visited_id: user_id,
+        action: 'like'
+      )
+      notification.save if notification.valid?
+    end
+  end
+  
 end
