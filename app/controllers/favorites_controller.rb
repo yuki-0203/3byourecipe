@@ -6,6 +6,8 @@ class FavoritesController < ApplicationController
     @recipe_favorite = Favorite.new(user_id: current_user.id, recipe_id: params[:recipe_id])
     if @recipe.user != current_user
       @recipe_favorite.save
+      #通知（recipe.rbにメソッド記載）
+      @recipe.create_notification_favorite!(current_user)
     else
       redirect_to  recipe_path(@recipe)
     end

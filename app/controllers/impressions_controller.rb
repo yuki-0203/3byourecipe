@@ -9,6 +9,8 @@ class ImpressionsController < ApplicationController
       redirect_to  recipe_path(@impression.recipe)
     else
       if @impression.save
+         #通知（modelにメソッド記載）
+        @impression.create_notification_impression!(current_user, @impression.recipe,@impression.recipe.user)
         redirect_to recipe_path(recipe), success: "脱レポを投稿しました！"
       else
         redirect_to recipe_path(recipe) , danger: "投稿できませんでした。感想は1文字以上、50文字以内で入力ください"

@@ -26,4 +26,7 @@ Rails.application.routes.draw do
       get 'profile'
     end
   end
+  
+  resources :notifications, only: :index
+  
 end

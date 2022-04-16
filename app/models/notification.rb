@@ -1,5 +1,4 @@
 class Notification < ApplicationRecord
-　#新しい通知から取得
   default_scope -> { order(created_at: :desc) }
   belongs_to :impression, optional: true
   belongs_to :recipe, optional: true
