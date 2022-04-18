@@ -272,3 +272,12 @@ h4:before {
     content: " *";
     color: red;
 }
+
+//通知のモーダルウインドウ（右寄せ）
+.modal-dialog.modal-sm.modal-dialog-scrollable {
+    width: 50%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 10;
+}
