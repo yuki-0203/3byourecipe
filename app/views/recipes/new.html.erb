@@ -31,7 +31,7 @@
             <!----------材料formの追加ボタン---------------->
             <div class="material-no">
               <div id="add-material">
-                <%= link_to_add_association "＋追加",f,:materials,class: "btn-sm btn-info col-1 text-center",
+                <%= link_to_add_association "＋追加",f,:materials,class: "plus btn-sm btn-info col-1 text-center",
                     data: { association_insertion_method: 'append' }%>
               </div>
             <!----------fields_for----------------%>
@@ -52,7 +52,7 @@
             <!----------調理手順formの追加ボタン---------------->
               <div class="step-no">
                 <div id="add-step">
-                  <%= link_to_add_association "＋追加".html_safe, f, :steps,class: "btn-sm btn-info col-1 text-center",
+                  <%= link_to_add_association "＋追加".html_safe, f, :steps,class: "plus btn-sm btn-info col-1 text-center",
                     data: { association_insertion_method: 'append'}%>
                 </div>
             <!----------調理手順formを以下に追加---------------->

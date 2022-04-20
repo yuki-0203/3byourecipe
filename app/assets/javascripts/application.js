@@ -35,9 +35,9 @@ $(function() {
 
   function check_to_hide_or_show_add_link() {
     if ($('.nested-fields.material-label:visible').length == 8) {
-      $('#add-material a.btn-sm.btn-info.col-1.text-center.add_fields').hide();
+      $('#add-material a.plus').hide();
     } else {
-      $('#add-material a.btn-sm.btn-info.col-1.text-center.add_fields').show();
+      $('#add-material a.plus').show();
     }
   }
 })
@@ -56,9 +56,9 @@ $(function() {
 
   function check_to_hide_or_show_add_link() {
     if ($('.nested-fields.step-label:visible').length == 5) {
-      $('#add-step a.btn-sm.btn-info.col-1.text-center.add_fields').hide();
+      $('#add-step a.plus').hide();
     } else {
-      $('#add-step a.btn-sm.btn-info.col-1.text-center.add_fields').show();
+      $('#add-step a.plus').show();
     }
   }
 })
