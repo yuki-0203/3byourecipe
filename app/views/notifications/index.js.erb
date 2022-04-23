@@ -1,2 +1,2 @@
-$("#notify-modal").html("<%= escape_javascript(render 'index', locals: { notifications: @notifications } ) %>")
+$("#notify-modal").html("<%= escape_javascript(render partial: 'notifications/notifications', locals: { notifications: notifications } ) %>")
 $("#notify-modal").modal("show")
