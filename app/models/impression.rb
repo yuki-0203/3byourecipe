@@ -14,7 +14,7 @@ class Impression < ApplicationRecord
     notification = current_user.active_notifications.new(
       impression_id: id,
       visitor_id: current_user.id,
-      recipe_id: recipe_id,
+      recipe_id: recipe_id.id,
       visited_id: visited_id.id,
       action: 'impression'
     )

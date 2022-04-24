@@ -12,12 +12,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <%# if @notifications.present? %>
-            <%#= render partial: 'notifications/notifications', locals: { nitifications: @nitifications } %>
-        <%# else %>
-            <!--<p>通知はありません</p>-->
-        <%# end %>
-                <%= notifications.present? %>
+        <% if @notifications.present? %>
+            <%= render partial: 'notifications/notifications', collection: @notifications %>
+        <% else %>
+            <p>通知はありません</p>
+        <% end %>
       </div>
     </div>
   </div>

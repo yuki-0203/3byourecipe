@@ -1,3 +1,7 @@
-<%# if notifications.action == "favorite" %>
-  <span>\ お知らせ / </span>
-<%# end %>
+<% @notifications.each do |notification| %>
+　<% if notification.action == "favorite" %>
+      <span><%= @notifications_user %>からいいねされています</span>
+　　<% elsif notification.action == "impression" %>
+      <span><%= notification.visitor_id%>から感想が来ています</span>
+　<% end %>
+<% end %>
