@@ -13,7 +13,7 @@
       </div>
       <div class="modal-body">
         <% if @notifications.present? %>
-            <%= render partial: 'notifications/notifications', collection: @notifications %>
+            <%= render partial: 'notifications/notifications', notifications: @notifications %>
         <% else %>
             <p>通知はありません</p>
         <% end %>
